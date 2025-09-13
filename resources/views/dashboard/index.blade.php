@@ -203,7 +203,7 @@ h3{
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success pull-right" style="width:100%;">ENVIAR PIX <i class="material-icons opacity-10">payments</i></button>
+                                        <button type="submit" class="btn btn-success pull-right" style="width:100%;">ENVIAR PIX <i class="fa-regular fa-dollar"></i></button>
                                     </div>
                                 </form>
                             </div>
