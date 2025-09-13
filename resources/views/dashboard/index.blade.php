@@ -199,13 +199,6 @@ h3{
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
-                                                <h6>PIX COPIA E COLA</h6>
-                                                <div class="col-md-12">
-                                                    <input type="text" id="emv_pix" placeholder="PIX COPIA E COLA" name="emv_pix" class="form-control emv_pix" style="width:100%;" onfocus="focused(this)" onfocusout="defocused(this)">
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                     <div class="modal-footer">
