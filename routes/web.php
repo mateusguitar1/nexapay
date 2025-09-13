@@ -19,7 +19,7 @@ Route::get('/', function () {
     if(isset(auth()->user()->id)){
         return redirect("/dashboard");
     }else{
-        return redirect('/login');
+        return view('login');
     }
 });
 Route::get('/register', function () {
