@@ -112,11 +112,6 @@
 
             @if(Auth::user()->level == 'master')
                 <li class="nav-item">
-                    <a class="nav-link createWithdrawPixCelcoin" href="#" data-toggle="modal" data-target="#createWithdrawPixCelcoin" role="button">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ switchUrl('/user/2fa') }}" role="button">
                         <i class="fas fa-fingerprint"></i>
                     </a>
