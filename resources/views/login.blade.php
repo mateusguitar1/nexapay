@@ -26,9 +26,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
-  <div class="card card-outline card-purple">
+  <div class="card card-outline card-green">
     <div class="card-header text-center">
-      <a href="#!" class="h1"><img src="{{asset('img/nexapa-color.png')}}" style="width:300px;"></a>
+      <a href="#!" class="h1"><img src="{{asset('img/nexapay-color.png')}}" style="width:200px;"></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Log in to start your session</p>
@@ -62,7 +62,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-purple btn-block">Sign In</button>
+            <button type="submit" class="btn btn-success btn-block">Sign In</button>
           </div>
           <!-- /.col -->
         </div>
