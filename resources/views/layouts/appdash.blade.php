@@ -54,7 +54,10 @@
         .search-title strong.text-light{
             color: #27a644 !important;
         }
-
+        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+            background-color: #27a644;
+            color: #fff;
+        }
     </style>
   @yield("css")
 </head>
