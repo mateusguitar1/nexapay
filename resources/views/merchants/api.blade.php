@@ -58,7 +58,7 @@
                                         <div class="row">
                                         @php
 
-                                            $urlBase = "https://tech.fastpayments.com.br/";
+                                            $urlBase = "https://apinexa.financebaking.com/";
                                             $titleEnvironments = "PRODUCTION";
 
                                         @endphp

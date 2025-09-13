@@ -750,7 +750,7 @@ class WithdrawController extends Controller
                 "branch" => 30,
                 "taxId" => "45403734000150",
                 "accountType" => "CACC",
-                "name" => "Fast Payments Administração de Pagamentos Ltda"
+                "name" => "NEXA PAY Administração de Pagamentos Ltda"
             ],
             "creditParty" => [
                 "key" => $params['pix_key'],
@@ -777,7 +777,7 @@ class WithdrawController extends Controller
         //         "branch" => 30,
         //         "taxId" => "45403734000150",
         //         "accountType" => "CACC",
-        //         "name" => "Fast Payments Administração de Pagamentos Ltda"
+        //         "name" => "NEXA PAY Administração de Pagamentos Ltda"
         //     ],
         //     "creditParty" => [
         //         "key" => $params['pix_key'],

@@ -3,12 +3,12 @@
 $trading_name = auth()->user()->client->name;
 $token = auth()->user()->client->key->authorization;
 
-$baseUrl = 'https://tech.fastpayments.com.br//';
+$baseUrl = 'https://apinexa.financebaking.com/';
 
 $var_json = '{
 	"info": {
 		"_postman_id": "8b036c9c-0584-4c0e-92d9-23b09b9735ec",
-		"name": "FAST PAYMENTS DOCUMENTATION",
+		"name": "NEXA PAY DOCUMENTATION",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

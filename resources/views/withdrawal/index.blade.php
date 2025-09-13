@@ -530,7 +530,7 @@ $total = (int)$total;
                                                                         <td style="border:none !important;background-color:#000;color:#fff;width: 2% !important; text-align: left !important;"><input type="checkbox" class="select-all" data-check="unchecked" style="cursor:pointer;" /> #</td>
                                                                         <td style="border:none !important;background-color:#000;color:#fff;width: 8% !important; text-align: left !important;">DATE</td>
                                                                         <td style="border:none !important;background-color:#000;color:#fff;width: 6% !important; text-align: left !important;">CLIENT</td>
-                                                                        <td style="border:none !important;background-color:#000;color:#fff;width: 8% !important; text-align: left !important;">FAST ID</td>
+                                                                        <td style="border:none !important;background-color:#000;color:#fff;width: 8% !important; text-align: left !important;">NEXA ID</td>
                                                                         <td style="border:none !important;background-color:#000;color:#fff;width: 6.5% !important; text-align: left !important;">USER</td>
                                                                         @if(auth()->user()->id == "1" || auth()->user()->id == "3" || auth()->user()->id == "4")
                                                                             <td style="border:none !important;background-color:#000;color:#fff;width: 6.5% !important; text-align: left !important;">OWNER</td>

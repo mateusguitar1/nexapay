@@ -23,7 +23,7 @@ class Get2faController extends Controller
         $secret = $g->generateSecret();
 
         //o método "getUrl" recebe como parâmetro: "username", "host" e a chave "secret"
-        $url = $g->getURL('fastpayments', 'fastpayments.com.br', $secret);
+        $url = $g->getURL('nexapay', 'financebaking.com', $secret);
 
         $data = [
             "url" => $url,
@@ -40,7 +40,7 @@ class Get2faController extends Controller
         $secret = $g->generateSecret();
 
         //o método "getUrl" recebe como parâmetro: "username", "host" e a chave "secret"
-        $url = $g->getURL(auth()->user()->id, 'fastpayments.com.br', $secret);
+        $url = $g->getURL(auth()->user()->id, 'financebaking.com', $secret);
 
         $data = [
             "url" => $url,

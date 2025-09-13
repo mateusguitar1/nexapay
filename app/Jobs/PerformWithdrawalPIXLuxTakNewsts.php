@@ -134,10 +134,10 @@ class PerformWithdrawalPIXLuxTakNewsts implements ShouldQueue
         // if($user_account_data['name'] != "" || $user_account_data['name'] !== null){
         //     $user_name = $user_account_data['name'];
         // }else{
-        //     $user_name = "Fast Payments";
+        //     $user_name = "NEXA PAY";
         // }
 
-        $user_name = "Fast Payments";
+        $user_name = "NEXA PAY";
 
         // if($user_account_data['document'] != "" && $user_account_data['document'] !== null){
         //     $user_document = $user_account_data['document'];

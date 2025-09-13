@@ -126,6 +126,91 @@ h3{
             <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
           <div class="@if(Auth::user()->level == 'master') col-md-8 @else col-md-7 @endif col-sm-12">
+                <div class=˜row˜>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-4">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <h6>GERAR PIX QRCODE</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <form id="formcreatePixAccount" method="post">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12 margin15">
+                                                <div class="input-group">
+                                                    <input required="" name="amount_solicitation" type="text" value="" class="form-control money_pix width100 text-right amount_solicitation_deposit_pix" style="text-align:right;" placeholder="Amount BRL" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="show_request_account"></div>
+                                    </div>
+                                    <div class="modal-footer hidden_after_account">
+                                        <button type="submit" class="btn btn-success pull-right" style="width:100%;">GENERATE <i class="fa fa-qrcode" aria-hidden="true"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-4">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <h6>TRANSFERENCIA POR PIX</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <form id="formSendPixAccount" method="post">
+                                    <div class="modal-body">
+                                        <div class="row">
+
+                                            <div class="col-md-12 mb-3">
+                                                <h6>PIX POR CHAVE</h6>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <select name="type_key" id="type_key" class="form-control type_key">
+                                                            <option value="CPF">CPF</option>
+                                                            <option value="CNPJ">CNPJ</option>
+                                                            <option value="PHONE">TELEFONE</option>
+                                                            <option value="EMAIL">EMAIL</option>
+                                                            <option value="EVP">ALEATÓRIA</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <input type="text" id="pix_key" placeholder="CHAVE PIX" name="pix_key" class="form-control pix_key" style="width:100%;" onfocus="focused(this)" onfocusout="defocused(this)">
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="input-group">
+                                                            <input name="amount_solicitation_send_pix" type="text" placeholder="Amount BRL" class="form-control money_pix width100 text-left amount_solicitation_send_pix" style="text-align:right;" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <h6>PIX COPIA E COLA</h6>
+                                                <div class="col-md-12">
+                                                    <input type="text" id="emv_pix" placeholder="PIX COPIA E COLA" name="emv_pix" class="form-control emv_pix" style="width:100%;" onfocus="focused(this)" onfocusout="defocused(this)">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success pull-right" style="width:100%;">ENVIAR PIX <i class="material-icons opacity-10">payments</i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <form method="POST" action="{{switchUrl('/dashboard')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
@@ -285,7 +370,7 @@ h3{
                 <thead>
                   <tr>
                     <th>DATE</th>
-                    <th class="text-center">FAST ID</th>
+                    <th class="text-center">NEXA ID</th>
                     <th class="text-center">CLIENT</th>
                     <th class="text-center">ORDER ID / USER NAME</th>
                     <th class="text-center">USER ID</th>

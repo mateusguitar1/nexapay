@@ -777,7 +777,7 @@ class DepositController extends Controller
 
         $cont_name = strlen($request->user_name);
         if($cont_name == 0){
-            $name_user = "Fast Payments System";
+            $name_user = "NEXA PAY System";
         }elseif($cont_name > 40){
             $nus = explode(" ",$request->user_name);
             $name_user = $nus[0]." ".$nus[1];

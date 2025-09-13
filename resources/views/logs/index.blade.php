@@ -79,7 +79,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label for="date">DATE</label>
                                         <button type="button" class="btn btn-date" name="new_date" id="daterangepicker2" style="width:100%;">
                                             <i class="fa fa-calendar"></i>
@@ -90,7 +90,7 @@
                                     </div>
 
 
-                                    <div class="col-sm-1 offset-sm-2">
+                                    <div class="col-sm-1 offset-sm-1">
                                         <button style=" width: 100%; margin-top: 32px;" class='btn btn-success' type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
