@@ -131,10 +131,11 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar @if(auth()->user()->theme == 'light') sidebar-light-primary @else sidebar-dark-primary @endif  elevation-4">
             <!-- Brand Logo -->
-
-            <a href="{{switchUrl('/dashboard')}}" class="brand-link">
-                <img src="{{asset('img/fast-payments-menu.png')}}" alt="NexaPay" style="width:220px;">
-            </a>
+            <center>
+                <a href="{{switchUrl('/dashboard')}}" class="brand-link">
+                    <img src="{{asset('img/nexapay-color.png')}}" alt="NexaPay" style="width:150px;">
+                </a>
+            </center>
 
             <!-- Sidebar -->
             <div class="sidebar">
