@@ -1,9 +1,9 @@
 .btn-purple{
-    background-color:#a348cc;
+    background-color:#27a644;
     color:#fff;
 }
 .btn-purple:hover{
-    background-color:#be70e2;
+    background-color:#1c7d32;
     color:#fff;
 }
 
@@ -16,12 +16,12 @@
 }
 
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
-    background-color: #a348cc;
+    background-color: #27a644;
     color: #fff;
 }
 
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link:hover, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link:hover {
-    background-color: #be70e2;
+    background-color: #1c7d32;
     color: #fff;
 }
 

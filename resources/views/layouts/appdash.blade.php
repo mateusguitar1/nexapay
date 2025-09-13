@@ -52,7 +52,7 @@
     <link rel="icon" type="image/svg+xml" href="{{asset('img/favicon.png')}}">
     <style type="text/css">
         .search-title strong.text-light{
-            color: #a348cc!important;
+            color: #27a644 !important;
         }
 
     </style>
