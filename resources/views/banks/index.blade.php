@@ -19,10 +19,10 @@
     <div class="container-fluid">
 
         <div class="row mb-2">
-            <div class="col-sm-11">
+            <div class="col-sm-10">
                 <h1 class="m-0">Bank Accounts</h1>
             </div><!-- /.col -->
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <a class='btn btn-primary' href="{{ switchUrl('banks/create') }}" style="padding:7px 10px;width:100%;">
                     <i class="fas fa-university"></i> New Bank
                 </a>
