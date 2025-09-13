@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FastPayments | Dashboard</title>
+  <title>NexaPay | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,7 +28,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-purple">
     <div class="card-header text-center">
-      <a href="#!" class="h1"><img src="{{asset('img/fast-payments-logo.png')}}" style="width:300px;"></a>
+      <a href="#!" class="h1"><img src="{{asset('img/nexapa-color.png')}}" style="width:300px;"></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Log in to start your session</p>
