@@ -1,0 +1,13 @@
+CREATE INDEX indx_transaction_id ON fastpayments.extract (transaction_id);
+CREATE INDEX indx_order_id ON fastpayments.extract (order_id);
+CREATE INDEX indx_client_id ON fastpayments.extract (client_id);
+CREATE INDEX indx_user_id ON fastpayments.extract (user_id);
+CREATE INDEX indx_type_transaction_extract ON fastpayments.extract (type_transaction_extract);
+CREATE INDEX indx_description_code ON fastpayments.extract (description_code);
+CREATE INDEX indx_description_text ON fastpayments.extract (description_text);
+CREATE INDEX indx_cash_flow ON fastpayments.extract (cash_flow);
+CREATE INDEX indx_final_amount ON fastpayments.extract (final_amount);
+CREATE INDEX indx_quote ON fastpayments.extract (quote);
+CREATE INDEX indx_quote_markup ON fastpayments.extract (quote_markup);
+CREATE INDEX indx_receita ON fastpayments.extract (receita);
+CREATE INDEX indx_disponibilization_date ON fastpayments.extract (disponibilization_date);

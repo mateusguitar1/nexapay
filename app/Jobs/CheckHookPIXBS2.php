@@ -1,0 +1,256 @@
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+
+use App\{Clients,Keys,Transactions,DataInvoice,Banks,Webhook,Extract};
+use DB;
+use App\Http\Controllers\FunctionsController;
+
+class CheckHookPIXBS2 implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $id_transaction;
+    protected $id_webhook;
+    public $tries = 1;
+
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct($id_transaction,$id_webhook)
+    {
+        //
+        $this->id_transaction = $id_transaction;
+        $this->id_webhook = $id_webhook;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //
+        $FunctionsController = new FunctionsController();
+
+        $transaction = Transactions::where("id","=",$this->id_transaction)->where("status","!=","confirmed")->first();
+        $bank = Banks::where("id",$transaction->id_bank)->first();
+        $webhook = Webhook::where("id","=",$this->id_webhook)->first();
+
+        $ck = json_decode($webhook['body'],true);
+        $code = $ck['pix'][0]['txid'];
+        $EndToEndId = $ck['pix'][0]['EndToEndId'];
+
+        if($code == $transaction->code && $EndToEndId != null){
+
+            $paid_date = date("Y-m-d H:i:s");
+            $clients = Clients::where("id","=",$transaction->client_id)->first();
+            $days_safe_pix = $clients->days_safe_pix;
+
+            $date_confirmed_bank = date("Y-m-d",strtotime("+".$days_safe_pix." days"))." 00:00:00";
+
+            // Calulo Taxas //
+            $cot_ar = $FunctionsController->get_cotacao_dolar($clients->id,"deposit");
+            $cotacao_dolar_markup = $cot_ar['markup'];
+            $cotacao_dolar = $cot_ar['quote'];
+            $spread_deposit = $cot_ar['spread'];
+
+            // Taxas
+            $tax = $clients->tax;
+
+            if($clients->currency == "brl"){
+
+                $cotacao_dolar_markup = "1";
+                $cotacao_dolar = "1";
+                $spread_deposit = "0";
+
+                $final_amount = $transaction->amount_solicitation;
+                $percent_fee = ($final_amount * ($tax->pix_percent / 100));
+                $fixed_fee = $tax->pix_absolute;
+                if(!is_numeric($fixed_fee)){ $fixed_fee = 0; }
+                $comission = ($percent_fee + $fixed_fee);
+                if($comission < $tax->min_fee_pix){ $comission = $tax->min_fee_pix; $min_fee = $tax->min_fee_pix; }else{ $min_fee = 0.00; }
+
+            }elseif($clients->currency == "usd"){
+
+                $final_amount = number_format(($transaction->amount_solicitation / $cotacao_dolar_markup),6,".","");
+                $fixed_fee = number_format(($tax->pix_absolute),6,".","");
+                $percent_fee = number_format(($final_amount * ($tax->pix_percent / 100)),6,".","");
+                if(!is_numeric($fixed_fee)){ $fixed_fee = 0; }
+                $comission = ($percent_fee + $fixed_fee);
+                if($comission < $tax->min_fee_pix){ $comission = $tax->min_fee_pix; $min_fee = $tax->min_fee_pix; }else{ $min_fee = 0.00; }
+
+            }
+
+            $valor_pago = $transaction->amount_solicitation;
+
+            $receita_comission = ($comission * $cotacao_dolar);
+            $receita_spread_deposito = ($valor_pago / $cotacao_dolar - $final_amount) * $cotacao_dolar;
+
+            DB::beginTransaction();
+            try{
+
+                $transaction->update([
+                    "status" => "confirmed",
+                    "amount_confirmed" => $valor_pago,
+                    "final_amount" => $final_amount,
+                    "quote" => $cotacao_dolar,
+                    "percent_markup" => $spread_deposit,
+                    "quote_markup" => $cotacao_dolar_markup,
+                    "fixed_fee" => $fixed_fee,
+                    "percent_fee" => $percent_fee,
+                    "comission" => $comission,
+                    "min_fee" => $min_fee,
+                    "confirmed_bank" => "1",
+                    "paid_date" => $paid_date,
+                    "final_date" => $paid_date,
+                    "disponibilization_date" => $date_confirmed_bank,
+                    "receita_spread" => $receita_spread_deposito,
+                    "receita_comission" => $receita_comission,
+                ]);
+
+                // // Deposit
+                Extract::create([
+                    "transaction_id" => $transaction->id,
+                    "order_id" => $transaction->order_id,
+                    "client_id" => $transaction->client_id,
+                    "user_id" => $transaction->user_id,
+                    "type_transaction_extract" => "cash-in",
+                    "description_code" => "MD02",
+                    "description_text" => "Depósito pro Pix",
+                    "cash_flow" => $transaction->amount_solicitation,
+                    "final_amount" => $transaction->final_amount,
+                    "quote" => $transaction->quote,
+                    "quote_markup" => $transaction->quote_markup,
+                    "receita" => ((($transaction->amount_solicitation / $transaction->quote) - $transaction->final_amount) * $transaction->quote),
+                    "disponibilization_date" => $transaction->disponibilization_date,
+                ]);
+                // // Comission
+                Extract::create([
+                    "transaction_id" => $transaction->id,
+                    "order_id" => $transaction->order_id,
+                    "client_id" => $transaction->client_id,
+                    "user_id" => $transaction->user_id,
+                    "type_transaction_extract" => "cash-out",
+                    "description_code" => "CM03",
+                    "description_text" => "Comissão sobre Depósito de Pix",
+                    "cash_flow" => $transaction->amount_solicitation,
+                    "final_amount" => ($transaction->comission * (-1)),
+                    "quote" => $transaction->quote,
+                    "quote_markup" => $transaction->quote_markup,
+                    "receita" => ($transaction->comission * $transaction->quote),
+                    "disponibilization_date" => $transaction->disponibilization_date,
+                ]);
+
+                DB::commit();
+
+                // Check if there is permission to withdraw the transaction fee
+
+                if($clients->permission_to_withdraw_fee_deposit == "yes"){
+                    if($bank->permission_to_withdraw_fee_deposit == "yes"){
+
+                        \App\Jobs\ReceivingTransactionFee::dispatch($transaction->id)->delay(now()->addSeconds('5'));
+
+                    }
+                }
+
+
+                // set post fields
+                $post = [
+                    "order_id" => $transaction->order_id,
+                    "user_id" => $transaction->user_id,
+                    "solicitation_date" => $transaction->solicitation_date,
+                    "paid_date" => $paid_date,
+                    "code_identify" => $transaction->code,
+                    "amount_solicitation" => $transaction->amount_solicitation,
+                    "amount_confirmed" => $transaction->amount_solicitation,
+                    "status" => "confirmed",
+                    "comission" => $comission,
+                    "disponibilization_date" => date("d/m/Y 00:00:00",strtotime($date_confirmed_bank)),
+                ];
+
+                $post_field = json_encode($post);
+
+                if($transaction->client_id == "213"){
+                    $ch2 = curl_init("https://webhook.site/a8f7b92e-1b5e-4ac5-90ed-0c088bef1fdb");
+                }else{
+                    $ch2 = curl_init("https://webhook.site/011d5c4e-779b-406b-adc0-4542c524ff9d");
+                }
+
+                curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch2, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($post_field),'authorization:'.$clients->key->authorization_deposit));
+                curl_setopt($ch2, CURLOPT_POSTFIELDS, $post_field);
+
+                // execute!
+                $response2 = curl_exec($ch2);
+                $http_status2  = curl_getinfo($ch2, CURLINFO_HTTP_CODE);
+
+                // close the connection, release resources used
+                curl_close($ch2);
+
+                $ch = curl_init($clients->key->url_callback_shop);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($post_field),'authorization:'.$clients->key->authorization_deposit));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $post_field);
+
+                // execute!
+                $response = curl_exec($ch);
+                $http_status  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                // close the connection, release resources used
+                curl_close($ch);
+
+                $post_register = [
+                    "date_send" => date("Y-m-d H:i:s"),
+                    "http_status" => $http_status,
+                    "order_id" => $transaction->order_id,
+                    "user_id" => $transaction->user_id,
+                    "solicitation_date" => $transaction->solicitation_date,
+                    "paid_date" => $paid_date,
+                    "code_identify" => $transaction->code,
+                    "amount_solicitation" => $transaction->amount_solicitation,
+                    "amount_confirmed" => $transaction->amount_solicitation,
+                    "status" => "confirmed",
+                    "comission" => $comission,
+                    "disponibilization_date" => date("d/m/Y 00:00:00",strtotime($date_confirmed_bank)),
+                ];
+
+                if($transaction->client_id == "213"){
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_pix_job_bdg.txt",json_encode($post_register));
+                }else{
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_pix_job.txt",json_encode($post_register));
+                }
+
+                if($http_status == "200"){
+
+                    $transaction->update([
+                        "confirmation_callback" => "1"
+                    ]);
+
+                    DB::commit();
+
+                }
+
+            }catch(Exception $e){
+                DB::rollback();
+            }
+
+        }
+
+    }
+}

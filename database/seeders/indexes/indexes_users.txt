@@ -1,0 +1,11 @@
+CREATE INDEX indx_id ON fastpayments.users (id);
+CREATE INDEX indx_name ON fastpayments.users (name);
+CREATE INDEX indx_level ON fastpayments.users (level);
+CREATE INDEX indx_sub_level ON fastpayments.users (sub_level);
+CREATE INDEX indx_client_id ON fastpayments.users (client_id);
+CREATE INDEX indx_email ON fastpayments.users (email);
+CREATE INDEX indx_email_verified_at ON fastpayments.users (email_verified_at);
+CREATE INDEX indx_password ON fastpayments.users (password);
+CREATE INDEX indx_freeze ON fastpayments.users (freeze);
+CREATE INDEX indx_current_team_id ON fastpayments.users (current_team_id);
+CREATE INDEX indx_profile_photo_path ON fastpayments.users (profile_photo_path);

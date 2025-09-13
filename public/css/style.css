@@ -1,0 +1,123 @@
+.btn-purple{
+    background-color:#a348cc;
+    color:#fff;
+}
+.btn-purple:hover{
+    background-color:#be70e2;
+    color:#fff;
+}
+
+.login-page{
+    background:url("../img/bg-login.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #a348cc;
+    color: #fff;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link:hover, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link:hover {
+    background-color: #be70e2;
+    color: #fff;
+}
+
+
+.btn-date{
+color: #455A64;
+background-color: #fafafa;
+border-color: #c0c0c0;
+}
+.btn-date:hover{
+background-color: #ededed;
+border-color: #ccc;
+}
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+width: 100% !important;
+}
+
+.dataTables_wrapper{
+    padding: 20px;
+}
+
+table.dataTable thead .sorting_asc:after,.sorting:after{
+    font-family: "Font Awesome 5 Free"  !important;
+    opacity: .5;
+    content:"\f0dc" !important;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    border: 2px solid #dedede !important;
+    border-radius: 3px !important;
+}
+
+#extract tr th{
+    font-size:14px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    background: #0398DB !important;
+    color: #FFF !important;
+    padding: 5px;
+    margin-right: 5px;
+    cursor:pointer;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active{
+    color: #FFF !important;
+    border:1px solid #127099 !important;
+    padding: 5px;
+    margin-right: 5px;
+    cursor:pointer;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+    background: #127099 !important;
+    color: #FFF !important;
+    border:1px solid #127099 !important;
+    padding: 5px;
+    margin-right: 5px;
+    cursor:pointer;
+}
+.dt-buttons{
+    position: absolute !important;
+}
+.buttons-csv{
+    background-color: #307fc3 !important;
+    border: none !important;
+    color: #FFF !important;
+    padding: 5px 15px !important;
+}
+.buttons-excel{
+    background-color: #16822d !important;
+    border: none !important;
+    color: #FFF !important;
+    padding: 5px 15px !important;
+    margin-right:5px;
+}
+.buttons-pdf{
+    background-color: #aa0404 !important;
+    border: none !important;
+    color: #FFF !important;
+    padding: 5px 15px !important;
+}
+
+tr.watching {
+    background-color: rgba(255, 167, 95, 0.3) !important;
+}
+td.blocked {
+    background-color: rgba(253, 62, 55, 0.3) !important;
+}
+
+.dark-mode .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #8d1cc0 !important;
+    color: #fff;
+}
+
+.dark-mode .btn-primary {
+    color: #fff;
+    background-color: #8d1cc0;
+    border-color: #8d1cc0;
+    box-shadow: none;
+}
