@@ -55,7 +55,11 @@
             color: #27a644 !important;
         }
         .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
-            background-color: #27a644;
+            background-color: #27a644 !important;
+            color: #fff;
+        }
+        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link:hover, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link:hover {
+            background-color: #1c7d32 !important;
             color: #fff;
         }
     </style>
