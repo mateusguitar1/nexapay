@@ -122,10 +122,10 @@ h3{
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="@if(Auth::user()->level == 'master') col-md-4 @else col-md-5 @endif col-sm-12">
+          <div class="@if(Auth::user()->level == 'master') col-md-12 @else col-md-5 @endif col-sm-12">
             <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
-          <div class="@if(Auth::user()->level == 'master') col-md-8 @else col-md-7 @endif col-sm-12">
+          <div class="@if(Auth::user()->level == 'master') col-md-12 @else col-md-7 @endif col-sm-12">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-4">
                         <div class="card">
