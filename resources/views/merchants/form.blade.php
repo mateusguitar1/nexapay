@@ -501,20 +501,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-
-                        <div class="col-sm-12 mb-12">
-                            <div class="md-form">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
-                                    <input readonly type="text" value="https://tech.fastpayments.com.br/" class='form-control'>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
 
             <div class="card">
@@ -544,42 +530,44 @@
             <div class="card-body" >
                 <form action="{{switchUrl('merchants/update_webhook')}}" method="POST" style="width:100%;">
                     {{ csrf_field() }}
-                    <div class="row">
-                        <input type="hidden" name="action" value="update">
-                        <div class="col-lg-4 col-xs-12" >
-                            <div class="form-group">
-                                <label for="">Token</label>
-                                <input type="text" name="token" id="token" value="{{ $data['model'] ? $data['model']->key()->first()->authorization : old('authorization', '') }}" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-xs-12" >
-                            <div class="form-group">
-                                <label for="">URL callback</label>
-                                <input type="text" name="url_callback" id="url_callback" value="{{ $data['model'] ? $data['model']->key()->first()->url_callback : old('url_callback', '') }}" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-xs-12" >
-                            <div class="form-group">
-                                <label for="">URL callback withdraw</label>
-                                <input type="text" name="url_callback_withdraw" id="url_callback_withdraw" value="{{ $data['model'] ? $data['model']->key()->first()->url_callback_withdraw : old('url_callback_withdraw', '') }}" class="form-control">
-                            </div>
-                        </div>
-
-                        @if(isset($data['model']))
-
-                            <div class="col-md-2 col-xs-2">
-                                <a href="{{switchUrl('merchants/update_api_keys/'.$data['model']->id)}}" class="confirmation-api-keys"><button type="button" class="btn" style="width:100%;background-color:#e8900c;color:#FFF;"><i class="da da-key"></i> UPDATE API KEYS</button></a>
-                            </div>
-
-                            <div class="form-group offset-md-8 offset-xs-8 col-md-2 col-xs-2" >
+                    @if(Auth::user()->level == 'master')
+                        <div class="row">
+                            <input type="hidden" name="action" value="update">
+                            <div class="col-lg-4 col-xs-12" >
                                 <div class="form-group">
-                                <button type="submit" class="btn btn-success confirmation-url-callback" style="width:100%;"><i class="fa fa-save"></i> UPDATE URL CALLBACK</button>
+                                    <label for="">Token</label>
+                                    <input type="text" name="token" id="token" value="{{ $data['model'] ? $data['model']->key()->first()->authorization : old('authorization', '') }}" class="form-control">
                                 </div>
                             </div>
-                        @endif
-                    </div>
+
+                            <div class="col-lg-4 col-xs-12" >
+                                <div class="form-group">
+                                    <label for="">URL callback</label>
+                                    <input type="text" name="url_callback" id="url_callback" value="{{ $data['model'] ? $data['model']->key()->first()->url_callback : old('url_callback', '') }}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-xs-12" >
+                                <div class="form-group">
+                                    <label for="">URL callback withdraw</label>
+                                    <input type="text" name="url_callback_withdraw" id="url_callback_withdraw" value="{{ $data['model'] ? $data['model']->key()->first()->url_callback_withdraw : old('url_callback_withdraw', '') }}" class="form-control">
+                                </div>
+                            </div>
+
+                            @if(isset($data['model']))
+
+                                <div class="col-md-2 col-xs-2">
+                                    <a href="{{switchUrl('merchants/update_api_keys/'.$data['model']->id)}}" class="confirmation-api-keys"><button type="button" class="btn" style="width:100%;background-color:#e8900c;color:#FFF;"><i class="da da-key"></i> UPDATE API KEYS</button></a>
+                                </div>
+
+                                <div class="form-group offset-md-8 offset-xs-8 col-md-2 col-xs-2" >
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-success confirmation-url-callback" style="width:100%;"><i class="fa fa-save"></i> UPDATE URL CALLBACK</button>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
                     <input type="hidden" name="client_id" value="{{ $data['model'] ? $data['model']->id : old('id', '') }}">
                 </form>
             </div>
