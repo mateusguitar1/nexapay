@@ -521,7 +521,7 @@ class WebhookController extends Controller
                                 $transaction_id = $transaction->id;
                                 $webhook_id = $webhook->id;
 
-                                \App\Jobs\CheckHookPIXSuitPayNew::dispatch($transaction_id,$webhook_id)->delay(now("5"));
+                                \App\Jobs\CheckHookPIXSuitPayNew::dispatch($transaction_id,$webhook_id)->delay(now("2"));
 
                                 return response()->json(["message" => "success", "transaction" => $transaction_id, "webhook" => $webhook_id]);
 
