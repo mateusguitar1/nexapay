@@ -142,15 +142,15 @@ h3{
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-md-12 margin15 mb-4">
+                                                <h6>Valor Depósito (BRL)</h6>
                                                 <div class="input-group">
-                                                    <label>Valor Depósito (BRL)</label>
                                                     <input required="" name="amount_solicitation" type="text" value="" class="form-control money_pix width100 text-right amount_solicitation_deposit_pix" style="text-align:right;" placeholder="0.00" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12 margin15">
+                                                <h6>Descrição</h6>
                                                 <div class="input-group">
-                                                    <label>Descrição</label>
                                                     <input required="" name="description" type="text" value="" class="form-control width100 text-right" style="text-align:right;" placeholder="Description">
                                                 </div>
                                             </div>
