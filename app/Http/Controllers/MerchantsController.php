@@ -513,8 +513,6 @@ class MerchantsController extends Controller
             "user_cep" => "---"
         ];
 
-        return response()->json(["token" => $token]);
-
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
