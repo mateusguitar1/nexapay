@@ -505,6 +505,88 @@ h3{
 
         });
 
+        $('#formSendPixAccount').submit(function(e){
+            e.preventDefault();
+            // var data = $(this).serialize();
+
+            var amount_solicitation_send_pix = $(".amount_solicitation_send_pix").val();
+            var pix_key = $(".pix_key").val();
+            var type_key = $(".type_key").val();
+            var emv_pix = $(".emv_pix").val();
+
+            var data = {
+                amount: amount_solicitation_send_pix,
+                pix_key: pix_key,
+                type_key: type_key,
+                emv_pix : emv_pix
+            };
+
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: "Você realmente deseja realizar um saque via pix?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, quero realizar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+
+                    $('#load').show();
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url:"{{switchUrl('merchants/sendPix')}}",
+                        method:"POST",
+                        dataType:"json",
+                        data:data,
+                        success:function(response){
+
+                            $('#load').hide();
+
+                            // console.log(response);
+
+                            if(response.message == "pending"){
+                                Swal.fire(
+                                    'Success!',
+                                    'Saque em processamento, aguarde...',
+                                    'success'
+                                );
+                            }
+
+                            if(response.status == "400"){
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: response.originalError.error.message,
+                                    icon: 'warning',
+                                });
+                            }
+
+                            if(response.code == "0443"){
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Saldo insuficiente para realizar a retirada!',
+                                    icon: 'warning',
+                                });
+                            }
+
+                            // location.reload();
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                    });
+
+                }
+            })
+        });
+
     })
 </script>
 @if(Auth::user()->level == 'master')

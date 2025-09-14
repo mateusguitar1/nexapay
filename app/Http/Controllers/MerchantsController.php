@@ -541,4 +541,65 @@ class MerchantsController extends Controller
         return response()->json($return);
     }
 
+    public function sendPix(Request $request){
+        $FunctionsAPIController = new FunctionsAPIController();
+
+        if(auth()->user()->level == "master"){
+            $clientt = Clients::where("id",8)->first();
+            $token = $clientt->key->authorization;
+        }else{
+            $token = auth()->user()->client->key->authorization;
+        }
+
+        $type_pixkey = "";
+
+        switch($request->type_key){
+            case"CPF": $type_pixkey = "cpf"; break;
+            case"CNPJ": $type_pixkey = "cnpj"; break;
+            case"PHONE": $type_pixkey = "phone"; break;
+            case"EMAIL": $type_pixkey = "email"; break;
+            case"EVP": $type_pixkey = "random"; break;
+        }
+
+        $data = [
+            "method" => "pix",
+            "order_id" => "NXP".generateRandomString(10),
+            "user_id" => "1234567",
+            "user_name" => "NexaPay",
+            "user_document" => "91969747021",
+            "pix_key" => $request->pix_key,
+            "type_pixkey" => $type_pixkey,
+            "amount" => $FunctionsAPIController->strtodouble($request->amount)
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://apirestnexapay.financebaking.com/api/withdraw",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => array(
+                'Token: '.$token,
+                'Accept: application/json',
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $return = json_decode($response,true);
+
+        return response()->json($return);
+
+
+    }
+
 }

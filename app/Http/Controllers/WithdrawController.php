@@ -390,12 +390,83 @@ class WithdrawController extends Controller
                                 $pix_key = $pix_key;
                         }
 
+                    }elseif($bank->code == "787"){
+
+                        $pix_key = $request->pix_key;
+
+                        $type = strtolower($request->type_pixkey);
+                        $type_pixkey = "";
+
+                        switch($type){
+                            case"telefone":
+                                $pix_key = str_replace("(","",$pix_key);
+                                $pix_key = str_replace(")","",$pix_key);
+                                $pix_key = str_replace(" ","",$pix_key);
+                                $pix_key = str_replace("-","",$pix_key);
+                                $pix_key = str_replace(".","",$pix_key);
+                                $pix_key = str_replace("+","",$pix_key);
+
+                                if(strlen($pix_key) > 11){
+                                    if(substr($pix_key,0,2) == "55"){
+                                        $pix_key = substr($pix_key,2,11);
+                                    }
+                                }
+
+                                $pix_key = "+55".$pix_key;
+                                $type_pixkey = "phone";
+                            break;
+                            case"phone":
+                                $pix_key = str_replace("(","",$pix_key);
+                                $pix_key = str_replace(")","",$pix_key);
+                                $pix_key = str_replace(" ","",$pix_key);
+                                $pix_key = str_replace("-","",$pix_key);
+                                $pix_key = str_replace(".","",$pix_key);
+                                $pix_key = str_replace("+","",$pix_key);
+
+                                if(strlen($pix_key) > 11){
+                                    if(substr($pix_key,0,2) == "55"){
+                                        $pix_key = substr($pix_key,2,11);
+                                    }
+                                }
+
+                                $pix_key = "+55".$pix_key;
+                                $type_pixkey = "phone";
+                            break;
+                            case"cpf":
+                                $pix_key = str_replace(".","",$pix_key);
+                                $pix_key = str_replace("-","",$pix_key);
+                                $type_pixkey = "cpf";
+                            break;
+                            case"cnpj":
+                                $pix_key = str_replace(".","",$pix_key);
+                                $pix_key = str_replace("-","",$pix_key);
+                                $pix_key = str_replace("/","",$pix_key);
+                                $type_pixkey = "cnpj";
+                            break;
+                            case"email":
+                                $pix_key = strtolower($pix_key);
+                                $type_pixkey = "email";
+                            break;
+                            case"aleatoria":
+                                $pix_key = $pix_key;
+                                $type_pixkey = "random";
+                            break;
+                            case"random":
+                                $pix_key = $pix_key;
+                                $type_pixkey = "random";
+                            break;
+                            default:
+                                $pix_key = $pix_key;
+                                $type_pixkey = "random";
+                        }
+
                     }
 
                 }
 
-                $pixkey = $request->pix_key;
-                $typepixkey = $request->type_pixkey;
+                $pixkey = $pix_key;
+                $typePixKey = $type_pixkey;
+
 
             }elseif($request->method == "ted"){
 
@@ -442,7 +513,7 @@ class WithdrawController extends Controller
             'type_operation' => $type_operation,
             'account' => $account,
             'pix_key' => $pixkey,
-            'type_pixkey' => $typepixkey,
+            'type_pixkey' => $typePixKey,
             'amount' => $amount,
             'method' => $method,
             'provider_reference' => $provider_reference,

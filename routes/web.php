@@ -74,6 +74,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/download-postman-collection', '\App\Http\Controllers\MerchantsController@postmanCollection');
 
     Route::post('merchants/charge', '\App\Http\Controllers\MerchantsController@charge')->name('merchants');
+    Route::post('merchants/sendPix', '\App\Http\Controllers\MerchantsController@sendPix')->name('merchants');
 
     Route::get('/myinfo', '\App\Http\Controllers\MerchantsController@info')->name('merchants');
 

@@ -6892,6 +6892,26 @@ class FunctionsAPIController extends Controller
 
                                         \App\Jobs\PerformWithdrawalPIXLuxTakNewsts::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
+                                    }elseif($params['method'] == "pix" && $bank_withdraw->code == "787"){
+
+                                        $return_info = [
+                                            "bank_withdraw_code" => $bank_withdraw->code,
+                                            "bank_id" => $bank_withdraw->id,
+                                            "transaction_id" => $transaction->id,
+                                            "order_id" => $transaction->order_id,
+                                            "permitted" => "permitted"
+                                        ];
+
+                                        $path_name = "suitpay-permition-withdraw-".date("Y-m-d");
+
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                                        }
+
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
+
+                                        \App\Jobs\PerformWithdrawalPIXSuitPay::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
+
                                     }else{
 
                                         $return_info = [
