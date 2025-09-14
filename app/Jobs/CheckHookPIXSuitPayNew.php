@@ -12,7 +12,7 @@ use DB;
 use App\Models\{Clients,Keys,Transactions,DataInvoice,Banks,Webhook,Extract};
 use App\Http\Controllers\FunctionsController;
 
-class CheckHookPIXSuitPay implements ShouldQueue
+class CheckHookPIXSuitPayNew implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
