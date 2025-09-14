@@ -144,14 +144,14 @@ h3{
                                             <div class="col-md-6 margin15 mb-4">
                                                 <h6>Valor Depósito (BRL)</h6>
                                                 <div class="input-group">
-                                                    <input required="" name="amount_solicitation" type="text" value="" class="form-control money_pix width100 text-right amount_solicitation_deposit_pix" style="text-align:right;" placeholder="0.00" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
+                                                    <input required="true" name="amount_solicitation" type="text" value="" class="form-control money_pix width100 text-right amount_solicitation_deposit_pix" style="text-align:right;" placeholder="0.00" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 margin15">
                                                 <h6>Descrição</h6>
                                                 <div class="input-group">
-                                                    <input required="" name="description" type="text" value="" class="form-control width100 text-right" style="text-align:right;" placeholder="Description">
+                                                    <input name="description" type="text" value="" class="form-control width100 text-right" style="text-align:right;" placeholder="Description">
                                                 </div>
                                             </div>
                                         </div>
@@ -463,7 +463,7 @@ h3{
         $('#formcreatePixAccount').submit(function(e){
             e.preventDefault();
 
-            $(".show_request_account").html("<br/><div class='text-center'><i class='fas fa-sync fa-spin fa-3x'></i></div>");
+            $(".show_request_account").html("<br/><div class='text-center'><i class='fas fa-sync fa-spin fa-3x' aria-hiden='true'></i></div>");
 
             var amount_solicitation = $(".amount_solicitation_deposit_pix").val();
 
