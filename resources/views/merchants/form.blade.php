@@ -280,7 +280,7 @@
                                 </tr>
                                 <tr>
                                     <td width="5%">Withdraw</td>
-                                    <td width="5%">TEF</td>
+                                    <td width="5%">PIX</td>
                                     <td width="10%">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">%</span>
@@ -315,7 +315,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td width="5%">Withdraw</td>
                                     <td width="5%">Transfer</td>
                                     <td width="10%">
@@ -379,7 +379,7 @@
                                             <input type="text" name="tax[max_withdraw_pix]" id="max_withdraw_pix" value="{{ $data['model'] ? number_format($data['taxs']->max_withdraw_pix,"2",",",".") : old('max_withdraw_pix', '') }}" class='form-control money'>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>
