@@ -494,7 +494,8 @@ class MerchantsController extends Controller
         $FunctionsAPIController = new FunctionsAPIController();
 
         if(auth()->user()->level == "master"){
-            $token = Clients::where("id",8)->key->authorization;
+            $clientt = Clients::where("id",8)->first();
+            $token = $clientt->key->authorization;
         }else{
             $token = auth()->user()->client->key->authorization;
         }
