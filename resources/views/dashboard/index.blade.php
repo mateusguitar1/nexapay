@@ -143,13 +143,15 @@ h3{
                                         <div class="row">
                                             <div class="col-md-12 margin15 mb-4">
                                                 <div class="input-group">
+                                                    <label>Valor Depósito (BRL)</label>
                                                     <input required="" name="amount_solicitation" type="text" value="" class="form-control money_pix width100 text-right amount_solicitation_deposit_pix" style="text-align:right;" placeholder="0.00" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12 margin15">
                                                 <div class="input-group">
-                                                    <input required="" name="description" type="text" value="" class="form-control money_pix width100 text-right amount_solicitation_deposit_pix" style="text-align:right;" placeholder="Description">
+                                                    <label>Descrição</label>
+                                                    <input required="" name="description" type="text" value="" class="form-control width100 text-right" style="text-align:right;" placeholder="Description">
                                                 </div>
                                             </div>
                                         </div>
