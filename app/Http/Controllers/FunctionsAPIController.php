@@ -3280,7 +3280,7 @@ class FunctionsAPIController extends Controller
 
         $pixSuitPay = json_decode($this->registerPIXSUITPAY($params),true);
 
-        if(isset($pixSuitPay['qr_code'])){
+        if(isset($pixSuitPay['paymentCode'])){
 
             $dados = $pixSuitPay['paymentCode'];
             $payment_id = $pixSuitPay['idTransaction'];
