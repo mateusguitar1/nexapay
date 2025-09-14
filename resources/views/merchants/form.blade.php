@@ -493,16 +493,6 @@
                 </div>
             </div>
 
-            <div class="card mt-4">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h5> <i class="fa fa-link text-black mr-2"></i> Base URL</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="card">
                 <div class="card-body">
                     <div class="row">
