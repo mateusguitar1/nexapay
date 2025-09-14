@@ -354,6 +354,12 @@
             </div>
         </div>
 
+        <div id="load" class="wrapper2 text-center"  style="display:none">
+            <div class="spinner-border spin" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; <?=date("Y");?> NexaPay.</strong>

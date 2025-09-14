@@ -559,11 +559,24 @@ h3{
                                     'success'
                                 );
                             }
-
+                            if(response.code == "0442"){
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Saque não permitido devido a saldo insuficiente disponível!',
+                                    icon: 'warning',
+                                });
+                            }
+                            if(response.code == "0442"){
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Saldo disponível insuficiente devido a retiradas pendentes!',
+                                    icon: 'warning',
+                                });
+                            }
                             if(response.code == "0443"){
                                 Swal.fire({
                                     title: 'Error!',
-                                    text: 'Saldo insuficiente para realizar a retirada!',
+                                    text: 'Valor de retirada maior que seu saldo disponível!',
                                     icon: 'warning',
                                 });
                             }
