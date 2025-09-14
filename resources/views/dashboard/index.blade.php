@@ -401,7 +401,7 @@ h3{
 
 <!-- Modal -->
 <div class="modal fade" id="showPix" tabindex="-1" role="dialog" aria-labelledby="showPixLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document" style="max-width: 1024px;">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>PAGAMENTO POR PIX</h4>
