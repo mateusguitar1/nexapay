@@ -62,6 +62,28 @@
             background-color: #1c7d32 !important;
             color: #fff;
         }
+        .wrapper2{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1040;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            opacity: 0.8;
+        }
+        .spin{
+            width: 150px;
+            height: 150px;
+            color: #fff;
+            margin-top: 30vh;
+        }
+        .button_close{
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            color: #999;
+        }
     </style>
   @yield("css")
 </head>
