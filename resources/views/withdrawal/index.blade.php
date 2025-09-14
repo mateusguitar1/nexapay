@@ -344,17 +344,6 @@ $total = (int)$total;
         <div class="col-sm-10">
             <h1 class="m-0">Withdraw</h1>
         </div><!-- /.col -->
-        @if(Auth::user()->level != 'payment')
-            <div class="col-sm-2">
-                <a href="#!" class='btn btn-primary text-white' style="width:100%;" data-toggle="modal" data-target="#createWithdraw">Create Withdraw</a>
-            </div>
-            {{-- <div class="col-sm-2">
-                <a href="#!" class="btn btn-warning approvePix" style="width:100%;" ></i>Approve Pix</a>
-            </div>
-            <div class="col-sm-2">
-                <a href="#!" class="btn btn-success sendPixOP" style="width:100%;" ></i>Send Pix OP</a>
-            </div> --}}
-        @endif
     </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
