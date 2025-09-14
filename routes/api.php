@@ -168,6 +168,10 @@ Route::post('/luxtakhook', [
     'uses' => '\App\Http\Controllers\WebhookController@luxtakWebhook'
 ]);
 
+Route::post('/suitpayhook', [
+    'uses' => '\App\Http\Controllers\WebhookController@suitpayWebhook'
+]);
+
 Route::post('/luxtakwithdrawhook', [
     'uses' => '\App\Http\Controllers\WebhookController@luxtakWebhookWithdraw'
 ]);
