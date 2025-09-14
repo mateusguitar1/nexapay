@@ -155,7 +155,7 @@ class PerformWithdrawalPaymentFront implements ShouldQueue
                     // close the connection, release resources used
                     curl_close($ch);
 
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentKey.txt",json_encode($post));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentKey.txt",json_encode($post));
 
                     $post_field = json_encode(["transaction_id" => $transaction->id]);
 
@@ -225,7 +225,7 @@ class PerformWithdrawalPaymentFront implements ShouldQueue
 
                 //     curl_close($curl);
 
-                //     $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentkey.txt",json_encode($getPayment));
+                //     $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentkey.txt",json_encode($getPayment));
 
                 // }
 
@@ -254,14 +254,14 @@ class PerformWithdrawalPaymentFront implements ShouldQueue
             //         DB::rollback();
             //     }
 
-            //     $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentkey.txt",json_encode(['message' => 'error paymentId','return' => $getPayment]));
+            //     $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentkey.txt",json_encode(['message' => 'error paymentId','return' => $getPayment]));
 
             // }
 
 
         // }else{
 
-        //     $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentkey.txt",json_encode(['message' => 'error token','return' => $tk]));
+        //     $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentkey.txt",json_encode(['message' => 'error token','return' => $tk]));
 
         // }
     }
@@ -298,7 +298,7 @@ class PerformWithdrawalPaymentFront implements ShouldQueue
             ]
         ];
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentKey.txt",json_encode($post));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentKey.txt",json_encode($post));
 
         $curl = curl_init();
 

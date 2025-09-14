@@ -19,11 +19,11 @@ class WithdrawController extends Controller
 
         $path_name = "create-withdraw-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",$request->getContent());
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",$request->getContent());
 
         $return;
         $client = Clients::where("id","=",$request->client)->first();
@@ -165,8 +165,8 @@ class WithdrawController extends Controller
 
                             $path_name = "celcoin-pixinfo-withdraw-".date("Y-m-d");
 
-                            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                             }
 
                             $data = [
@@ -175,7 +175,7 @@ class WithdrawController extends Controller
                                 "request" => $request->all()
                             ];
 
-                            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data));
+                            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data));
 
                             $json_return = array("message" => $getPixInfo, "reason" => "Illegal Conditions");
                             return response()->json($json_return,422,['HTTP/1.0' => 'Unauthorized']);

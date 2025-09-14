@@ -105,7 +105,7 @@ class PerformWithdrawalPaymentPIX implements ShouldQueue
             ]
         ];
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentKey.txt",json_encode($post));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentKey.txt",json_encode($post));
 
         $curl = curl_init();
 

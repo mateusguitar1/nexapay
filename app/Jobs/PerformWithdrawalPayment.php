@@ -168,7 +168,7 @@ class PerformWithdrawalPayment implements ShouldQueue
                      // close the connection, release resources used
                      curl_close($ch);
 
-                     $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpayment.txt",json_encode($post));
+                     $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpayment.txt",json_encode($post));
 
                      $post_field = json_encode(["transaction_id" => $transaction->id]);
 
@@ -185,7 +185,7 @@ class PerformWithdrawalPayment implements ShouldQueue
                      // close the connection, release resources used
                      curl_close($ch);
 
-                     $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/sendreceiptfront.txt",json_encode($responsenew));
+                     $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/sendreceiptfront.txt",json_encode($responsenew));
 
                   }else{
 
@@ -214,20 +214,20 @@ class PerformWithdrawalPayment implements ShouldQueue
 
                      curl_close($curl);
 
-                     $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentcancel.txt",json_encode($getPaymentId));
+                     $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentcancel.txt",json_encode($getPaymentId));
 
                   }
 
             }else{
 
-                  $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpayment.txt",json_encode(['message' => 'error paymentId','return' => $getPaymentId]));
+                  $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpayment.txt",json_encode(['message' => 'error paymentId','return' => $getPaymentId]));
 
             }
 
 
          }else{
 
-            $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpayment.txt",json_encode(['message' => 'error token','return' => $tk]));
+            $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpayment.txt",json_encode(['message' => 'error token','return' => $tk]));
 
          }
 
@@ -292,7 +292,7 @@ class PerformWithdrawalPayment implements ShouldQueue
 
         curl_close($curl);
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentsolicitation.txt",json_encode(json_decode($response,true)));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentsolicitation.txt",json_encode(json_decode($response,true)));
 
         return $response;
 
@@ -362,7 +362,7 @@ class PerformWithdrawalPayment implements ShouldQueue
 
          curl_close($curl);
 
-         $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/performwithdrawalpaymentconfirm.txt",json_encode(json_decode($response,true)));
+         $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/performwithdrawalpaymentconfirm.txt",json_encode(json_decode($response,true)));
 
          if($httpcode == 202){
             return ["message" => "success", "http_code" => $httpcode];

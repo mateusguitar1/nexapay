@@ -111,11 +111,11 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
                 $path_name = "celcoin-token-execute-withdraw".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($token_celcoin));
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($token_celcoin));
 
                 $token = $token_celcoin['access_token'];
 
@@ -159,11 +159,11 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
                 $path_name = "celcoin-return-info-new-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                 if(isset($pixInfo['account'])){
 
@@ -248,11 +248,11 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
                     $path_name = "celcoin-cashout-".date("Y-m-d");
 
-                    if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                        mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                     }
 
-                    $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_response));
+                    $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
 
                     if(isset($get_response['transactionId'])){
 
@@ -300,8 +300,8 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
                     $path_name = "celcoin-pixinfo-withdraw-".date("Y-m-d");
 
-                    if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                        mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                     }
 
                     $data = [
@@ -310,7 +310,7 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
                         "account_data" => $user_account_data
                     ];
 
-                    $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data));
+                    $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data));
 
                 }
             }
@@ -332,11 +332,11 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
             $path_name = "celcoin-token-execute-withdraw".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
-            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($token_celcoin));
+            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($token_celcoin));
 
             $token = $token_celcoin['access_token'];
 
@@ -415,11 +415,11 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
             $path_name = "celcoin-return-info-new-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
-            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
             if(isset($pixInfo['account'])){
 
@@ -504,11 +504,11 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
                 $path_name = "celcoin-cashout-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_response));
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
 
                 if(isset($get_response['transactionId'])){
 
@@ -556,8 +556,8 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
 
                 $path_name = "celcoin-pixinfo-withdraw-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
                 $data = [
@@ -566,7 +566,7 @@ class PerformWithdrawalPaymentPIXCelcoinTRUE implements ShouldQueue
                     "account_data" => $user_account_data
                 ];
 
-                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data));
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data));
 
             }
         }

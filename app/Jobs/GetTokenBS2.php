@@ -72,7 +72,7 @@ class GetTokenBS2 implements ShouldQueue
 
         curl_close($curl);
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/save-token-bs2.txt",$response);
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/save-token-bs2.txt",$response);
 
         $dec = json_decode($response,true);
 

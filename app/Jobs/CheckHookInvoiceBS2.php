@@ -47,7 +47,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
             "webhook_return" => $webhook
         ];
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_job.txt",json_encode($data_save));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/get_webhook_job.txt",json_encode($data_save));
 
         $row = Transactions::where("client_id","=",$this->id_client)
             ->where("order_id","=",$this->id_order)
@@ -207,7 +207,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
                             "check" => "webhook"
                         );
 
-                        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/etapa-bs2.txt",json_encode($verify));
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/etapa-bs2.txt",json_encode($verify));
 
                         if($row['confirmed_bank'] == NULL || $row['confirmed_bank'] == '0'){
                             $confirmed_bank_check = "0";
@@ -342,7 +342,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
 
                                 $post_var = json_encode($post_var);
 
-                                $fp = fopen('/var/www/html/fastpayments/logs/send-callback-bs2boleto.txt', 'a');
+                                $fp = fopen('/var/www/html/nexapay/logs/send-callback-bs2boleto.txt', 'a');
                                 fwrite($fp, $post_var."\n");
                                 fclose($fp);
 
@@ -815,7 +815,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
                             "check" => "webhook"
                         );
 
-                        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/etapa-bs2.txt",json_encode($verify));
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/etapa-bs2.txt",json_encode($verify));
 
                         if($row['confirmed_bank'] == NULL || $row['confirmed_bank'] == '0'){
                             $confirmed_bank_check = "0";
@@ -947,7 +947,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
 
                                 $post_var = json_encode($post_var);
 
-                                $fp = fopen('/var/www/html/fastpayments/logs/send-callback-bs2boleto.txt', 'a');
+                                $fp = fopen('/var/www/html/nexapay/logs/send-callback-bs2boleto.txt', 'a');
                                 fwrite($fp, $post_var."\n");
                                 fclose($fp);
 
@@ -1240,7 +1240,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
                         "check" => "webhook"
                     );
 
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/etapa-bs2.txt",json_encode($verify));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/etapa-bs2.txt",json_encode($verify));
 
                     if($row['confirmed_bank'] == NULL || $row['confirmed_bank'] == '0'){
                         $confirmed_bank_check = "0";
@@ -1372,7 +1372,7 @@ class CheckHookInvoiceBS2 implements ShouldQueue
 
                             $post_var = json_encode($post_var);
 
-                            $fp = fopen('/var/www/html/fastpayments/logs/send-callback-bs2boleto.txt', 'a');
+                            $fp = fopen('/var/www/html/nexapay/logs/send-callback-bs2boleto.txt', 'a');
                             fwrite($fp, $post_var."\n");
                             fclose($fp);
 

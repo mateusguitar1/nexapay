@@ -91,8 +91,8 @@ class RefundTransactionCelcoin implements ShouldQueue
 
         $path_name = "celcoin-refund-pix-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
         $data_request_auth = [
@@ -100,7 +100,7 @@ class RefundTransactionCelcoin implements ShouldQueue
             "created_at" => date("Y-m-d H:i:s")
         ];
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_request_auth));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_request_auth));
 
         DB::beginTransaction();
         try{

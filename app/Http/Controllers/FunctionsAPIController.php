@@ -732,11 +732,11 @@ class FunctionsAPIController extends Controller
 
             $checkUser = $this->checkDataCreditCardMP($params,$publicKeyMP,$accessTokenMP);
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/create-new-user-mp.txt",json_encode($checkUser));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/create-new-user-mp.txt",json_encode($checkUser));
 
             $createTransactionMP = json_decode($this->createTransactionMP($checkUser,$params,$accessTokenMP),true);
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/create-transaction-mp.txt",json_encode($createTransactionMP));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/create-transaction-mp.txt",json_encode($createTransactionMP));
 
             if(isset($createTransactionMP['error'])){
 
@@ -2753,8 +2753,8 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-voluti-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
                 $payload = [
@@ -2764,7 +2764,7 @@ class FunctionsAPIController extends Controller
                     "return_celcoin" => $pixVoluti
                 ];
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                 $ar = array(
                     "code" => "558",
@@ -2868,11 +2868,11 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-voluti-success-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixVoluti]));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixVoluti]));
 
                 // Success
                 return response()->json($json_return,200);
@@ -2906,8 +2906,8 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-hubapi-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
                 $payload = [
@@ -2917,7 +2917,7 @@ class FunctionsAPIController extends Controller
                     "return_celcoin" => $pixVoluti
                 ];
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                 $ar = array(
                     "code" => "558",
@@ -3021,11 +3021,11 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-voluti-success-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixVoluti]));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixVoluti]));
 
                 // Success
                 return response()->json($json_return,200);
@@ -3138,8 +3138,8 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-luxtax-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
                 $payload = [
@@ -3149,7 +3149,7 @@ class FunctionsAPIController extends Controller
                     "return_luxtax" => $pixLuxTax
                 ];
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                 $ar = array(
                     "code" => "546",
@@ -3253,11 +3253,11 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-luxtax-success-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixLuxTax]));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixLuxTax]));
 
                 // Success
                 return response()->json($json_return,200);
@@ -3269,6 +3269,161 @@ class FunctionsAPIController extends Controller
         }else{
 
             return response()->json($pixLuxTax);
+
+        }
+
+    }
+
+    public function createTransactionPIXSUITPAY($params = array()){
+
+        $clients = Clients::where("id","=",$params['client_id'])->first();
+
+        $pixSuitPay = json_decode($this->registerPIXSUITPAY($params),true);
+
+        if(isset($pixSuitPay['qr_code'])){
+
+            $dados = $pixSuitPay['paymentCode'];
+            $payment_id = $pixSuitPay['idTransaction'];
+            $date = date("Y-m-d H:i:s");
+            $barcode = "";
+
+            $check_count = strlen($dados);
+
+            if($check_count < 10){
+
+                $path_name = "nexalogs-pix-suitpay-".date("Y-m-d");
+
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                }
+
+                $payload = [
+                    "date" => $date,
+                    "client" => $clients->name,
+                    "params" => $params,
+                    "return_luxtax" => $pixSuitPay
+                ];
+
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
+
+                $ar = array(
+                    "code" => "546",
+                    "message" => "Erro on create QrCode PIX ".$params['pedido'],
+                    "return" => $pixSuitPay
+                );
+
+                return response()->json($ar,422);
+
+            }
+
+            // GET DAYS SAFE
+            $days_safe_pix = $clients->days_safe_pix;
+
+            // GET BANK DATA
+            $bank = $clients->bankPix;
+            $link_callback_bank = "";
+
+            $user_data = array(
+                "name" => $params['nome_usuario'],
+                "document" => $params['documento_usuario'],
+                "bank_name" => $bank->name,
+                "holder" => $bank->holder,
+                "agency" => $bank->agency,
+                "account_number" => $bank->account,
+                "operation_bank" => $bank->type_account,
+                "user_id" => $params['user_id'],
+                "client_id" => $params['client_id'],
+                "address" => $this->trata_unicode($params['endereco_usuario']),
+                "district" => $this->trata_unicode($params['bairro_usuario']),
+                "city" => $this->trata_unicode($params['cidade_usuario']),
+                "uf" => $params['uf_usuario'],
+                "cep" => $params['cep_usuario']
+            );
+
+            $user_account_data = base64_encode(json_encode($user_data));
+
+            // Taxas
+            $tax = $clients->tax;
+
+            $cotacao_dolar_markup = "1";
+            $cotacao_dolar = "1";
+            $spread_deposit = "0";
+
+            $final_amount = $params['amount'];
+            $percent_fee = ($final_amount * ($tax->pix_percent / 100));
+            $fixed_fee = $tax->pix_absolute;
+            if(!is_numeric($fixed_fee)){ $fixed_fee = 0; }
+            $comission = ($percent_fee + $fixed_fee);
+            if($comission < $tax->min_fee_pix){ $comission = $tax->min_fee_pix; $min_fee = $tax->min_fee_pix; }else{ $min_fee = "NULL"; }
+
+
+            $data_invoice_id = NULL;
+
+            DB::beginTransaction();
+            try {
+
+                // Insert Transaction
+                $transaction = Transactions::create([
+                    "solicitation_date" => $date,
+                    "final_date" => $date,
+                    "due_date" => date("Y-m-d",strtotime($date."+ ".$days_safe_pix." days")),
+                    "code" => $params['pedido'],
+                    "client_id" => $params['client_id'],
+                    "order_id" => $params['order_id'],
+                    "user_id" => $params['user_id'],
+                    "user_document" => $params['documento_usuario'],
+                    "user_account_data" => $user_account_data,
+                    "user_name" => $params['nome_usuario'],
+                    "id_bank" => $clients->bankPix->id,
+                    "type_transaction" => 'deposit',
+                    "method_transaction" => 'pix',
+                    "amount_solicitation" => $params['amount'],
+                    "final_amount" => $final_amount,
+                    "status" => 'pending',
+                    "bank_data" => $dados,
+                    "payment_id" => $payment_id,
+                    "code_bank" => $bank->code,
+                    "link_callback_bank" => $link_callback_bank,
+                    "url_retorna" => "",
+                    "data_invoice_id" => $data_invoice_id,
+                    "quote" => $cotacao_dolar,
+                    "percent_markup" => $spread_deposit,
+                    "quote_markup" => $cotacao_dolar_markup,
+                ]);
+
+                DB::commit();
+
+                $link_qr = "https://image-charts.com/chart?chs=350x350&cht=qr&chl=".$dados;
+
+                $json_return = array(
+                    "order_id" => $params['order_id'],
+                    "solicitation_date" => $date,
+                    "due_date" => date("Y-m-d",strtotime($date."+ ".$days_safe_pix." days")),
+                    "code_identify" => $params['pedido'],
+                    "amount" => $params['amount'],
+                    "status" => "pending",
+                    "link_qr" => $link_qr,
+                    "content_qr" => $dados
+                );
+
+                $path_name = "nexalogs-pix-suitpay-success-".date("Y-m-d");
+
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                }
+
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_suitpay" => $pixSuitPay]));
+
+                // Success
+                return response()->json($json_return,200);
+
+            }catch(exception $e){
+                DB::roolback();
+            }
+
+        }else{
+
+            return response()->json($pixSuitPay);
 
         }
 
@@ -3338,8 +3493,8 @@ class FunctionsAPIController extends Controller
 
                         $path_name = "fastlogs-pix-celcoin-".date("Y-m-d");
 
-                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                         }
 
                         $payload = [
@@ -3349,7 +3504,7 @@ class FunctionsAPIController extends Controller
                             "return_celcoin" => $pixCelcoin
                         ];
 
-                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                         $ar = array(
                             "code" => "558",
@@ -3478,8 +3633,8 @@ class FunctionsAPIController extends Controller
 
                             $path_name = "fastlogs-pix-".date("Y-m-d");
 
-                            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                             }
 
                             $payload = [
@@ -3489,7 +3644,7 @@ class FunctionsAPIController extends Controller
                                 "return_celcoin" => $pixCelcoin
                             ];
 
-                            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                             $ar = array(
                                 "code" => "558",
@@ -3504,11 +3659,11 @@ class FunctionsAPIController extends Controller
 
                         $path_name = "fastlogs-pix-success-".date("Y-m-d");
 
-                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                         }
 
-                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_celcoin" => $pixCelcoin]));
+                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_celcoin" => $pixCelcoin]));
 
                         // Success
                         return response()->json($json_return,200);
@@ -3536,8 +3691,8 @@ class FunctionsAPIController extends Controller
 
             $path_name = "fastlogs-pix-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -3547,7 +3702,7 @@ class FunctionsAPIController extends Controller
                 "return_openpix" => $register
             ];
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",
@@ -3816,11 +3971,11 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "get-token-celcoin-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",$response);
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",$response);
 
                 curl_close($curl);
 
@@ -3829,11 +3984,11 @@ class FunctionsAPIController extends Controller
 
                     $path_name = "get-token-celcoin-".date("Y-m-d");
 
-                    if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                        mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                     }
 
-                    $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["error" => print_r(curl_error($curl))]));
+                    $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["error" => print_r(curl_error($curl))]));
 
                     curl_close($curl);
                     exit();
@@ -4954,8 +5109,8 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
                 $payload = [
@@ -4965,7 +5120,7 @@ class FunctionsAPIController extends Controller
                     "return_openpix" => $register
                 ];
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                 $ar = array(
                     "code" => "558",
@@ -5094,8 +5249,8 @@ class FunctionsAPIController extends Controller
 
                     $path_name = "fastlogs-pix-".date("Y-m-d");
 
-                    if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                        mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                     }
 
                     $payload = [
@@ -5105,7 +5260,7 @@ class FunctionsAPIController extends Controller
                         "return_openpix" => $register
                     ];
 
-                    $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                    $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                     $ar = array(
                         "code" => "558",
@@ -5120,11 +5275,11 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-success-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_openpix" => $register]));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_openpix" => $register]));
 
                 // Success
                 return response()->json($json_return,200);
@@ -5137,8 +5292,8 @@ class FunctionsAPIController extends Controller
 
             $path_name = "fastlogs-pix-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -5148,7 +5303,7 @@ class FunctionsAPIController extends Controller
                 "return_openpix" => $register
             ];
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",
@@ -6631,11 +6786,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "celcoin-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                         \App\Jobs\PerformWithdrawalPaymentPIXCelcoinTRUE::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
@@ -6651,11 +6806,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "voluti-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                         \App\Jobs\PerformWithdrawalPIXVoluti::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
@@ -6670,11 +6825,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "shipay-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                         \App\Jobs\PerformWithdrawalPaymentPIX::dispatch($transaction->id)->delay(now()->addSeconds('5'));
                                     }elseif($params['method'] == "pix" && $bank_withdraw->code == "844"){
@@ -6689,11 +6844,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "hubapi-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                         \App\Jobs\PerformWithdrawalPIXHUBAPIANYNEW::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
@@ -6709,11 +6864,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "volutinew-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                         \App\Jobs\PerformWithdrawalPIXVolutiFILENEW::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
@@ -6729,11 +6884,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "luxtak-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                         \App\Jobs\PerformWithdrawalPIXLuxTakNewsts::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
@@ -6748,11 +6903,11 @@ class FunctionsAPIController extends Controller
 
                                         $path_name = "celcoin-permition-withdraw-".date("Y-m-d");
 
-                                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                         }
 
-                                        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                     }
 
@@ -6765,11 +6920,11 @@ class FunctionsAPIController extends Controller
 
                                     $path_name = "bank-permition-withdraw-".date("Y-m-d");
 
-                                    if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                        mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                     }
 
-                                    $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                    $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                                 }
                             }else{
@@ -6781,11 +6936,11 @@ class FunctionsAPIController extends Controller
 
                                 $path_name = "celcoin-permition-withdraw-".date("Y-m-d");
 
-                                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                                 }
 
-                                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                             }
 
@@ -6798,11 +6953,11 @@ class FunctionsAPIController extends Controller
 
                             $path_name = "check-permition-withdraw-".date("Y-m-d");
 
-                            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                             }
 
-                            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($return_info));
+                            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
 
                         }
                     }
@@ -7944,7 +8099,7 @@ class FunctionsAPIController extends Controller
 
         curl_close($curl);
 
-        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/response-create-facilpay-creditcard.txt",$response);
+        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/response-create-facilpay-creditcard.txt",$response);
 
         return $response;
     }
@@ -8668,7 +8823,7 @@ class FunctionsAPIController extends Controller
 
         curl_close($curl);
 
-        $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/create_cc_pagseguro_return.txt",json_encode((array)simplexml_load_string($response)));
+        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/create_cc_pagseguro_return.txt",json_encode((array)simplexml_load_string($response)));
 
         return json_encode((array)simplexml_load_string($response));
 
@@ -8891,7 +9046,7 @@ class FunctionsAPIController extends Controller
                 // Error, Brand not found
                 $json_return = array("message" => "Error on create credit card transaction", "reason" => "Illegal Conditions", "return" => json_encode($transactionCredpay));
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/request-error-log-deposit-creditcard-credpay.txt",json_encode($json_return));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/request-error-log-deposit-creditcard-credpay.txt",json_encode($json_return));
 
                 return response()->json($json_return,401);
                 exit();
@@ -9262,8 +9417,8 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-volutinew-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
                 $payload = [
@@ -9273,7 +9428,7 @@ class FunctionsAPIController extends Controller
                     "return_voluti" => $pixVolutiNew
                 ];
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/pixlog.txt",json_encode($payload));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
 
                 $ar = array(
                     "code" => "558",
@@ -9377,11 +9532,11 @@ class FunctionsAPIController extends Controller
 
                 $path_name = "fastlogs-pix-volutinew-success-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixVolutiNew]));
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_voluti" => $pixVolutiNew]));
 
                 // Success
                 return response()->json($json_return,200);
@@ -9473,11 +9628,11 @@ class FunctionsAPIController extends Controller
 
             $path_name = "volutinew-token-error-withdraw-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["error" => print_r(curl_error($ch))]));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["error" => print_r(curl_error($ch))]));
 
             curl_close($ch);
             exit();
@@ -9596,6 +9751,70 @@ class FunctionsAPIController extends Controller
     }
 
     // end integration LuxTax
+
+    // strat integration SuitPay //
+
+    public function registerPIXSUITPAY($params = array()){
+
+        $data = [
+            "requestNumber" => $params['pedido'],
+            "dueDate" => date("Y-m-d"),
+            "amount" => $params['amount'],
+            "shippingAmount" => 0.0,
+            "discountAmount" => 0.0,
+            "usernameCheckout" => "checkout",
+            "callbackUrl" => "https://webhook.site/0666a54a-77e9-4b3f-968e-7ddbe41a6867",
+            "client" => [
+                "name" => $params['nome_usuario'],
+                "document" => $params['documento_usuario'],
+                "phoneNumber" => "62999815500",
+                "email" => "systemnexapay@gmail.com",
+                    "address" => [
+                        "codIbge" =>"5208707",
+                        "street" => $params['endereco_usuario'],
+                        "number" => $params['numero_endereco'],
+                        "complement" => "",
+                        "zipCode" => $params['cep_usuario'],
+                        "neighborhood" => $params['bairro_usuario'],
+                        "city" => $params['cidade_usuario'],
+                        "state" => $params['uf_usuario']
+                    ]
+            ],
+            "products" => [
+                "description" => "Pedido n ".$params['pedido'],
+                "quantity" => 1,
+                "value" => $params['amount']
+            ]
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://sandbox.ws.suitpay.app/api/v1/gateway/request-qrcode',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'ci: '.$params['ci'],
+            'cs: '.$params['cs']
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+		return $response;
+
+    }
+
+    // end integration SuitPay
 
 
     // Functions used as inheritance

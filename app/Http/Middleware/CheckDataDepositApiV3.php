@@ -83,11 +83,11 @@ class CheckDataDepositApiV3
 
                 $path_name = "block-pix-".date("Y-m-d");
 
-                if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                    mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                 }
 
-                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($request));
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($request));
 
                 return response()->json($json_return,422,['HTTP/1.0' => 'Unauthorized']);
                 exit();

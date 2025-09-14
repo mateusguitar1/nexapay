@@ -181,7 +181,7 @@ class CheckHookPIXASAAS implements ShouldQueue
                     "disponibilization_date" => date("d/m/Y 00:00:00",strtotime($date_confirmed_bank)),
                 ];
 
-                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_pix_job_openpix.txt",json_encode($post_register));
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/get_webhook_pix_job_openpix.txt",json_encode($post_register));
 
                 if($http_status == "200"){
 

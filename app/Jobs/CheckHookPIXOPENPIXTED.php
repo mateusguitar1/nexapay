@@ -213,7 +213,7 @@ class CheckHookPIXOPENPIXTED implements ShouldQueue
                         "disponibilization_date" => $date_confirmed_bank,
                     ];
 
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_pix_job_openpix_ted.txt",json_encode($post_register));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/get_webhook_pix_job_openpix_ted.txt",json_encode($post_register));
 
                     if($http_status == "200"){
 

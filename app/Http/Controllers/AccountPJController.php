@@ -133,8 +133,8 @@ class AccountPJController extends Controller
 
             $path_name = "fastlogs-token-celcoin-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -144,7 +144,7 @@ class AccountPJController extends Controller
                 "retur_celcoin" => $token_celcoin
             ];
 
-            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
+            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",
@@ -301,8 +301,8 @@ class AccountPJController extends Controller
 
             $path_name = "fastlogs-token-celcoin-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -312,7 +312,7 @@ class AccountPJController extends Controller
                 "retur_celcoin" => $token_celcoin
             ];
 
-            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
+            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",
@@ -604,8 +604,8 @@ class AccountPJController extends Controller
 
             $path_name = "fastlogs-token-celcoin-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -615,7 +615,7 @@ class AccountPJController extends Controller
                 "retur_celcoin" => $token_celcoin
             ];
 
-            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
+            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",

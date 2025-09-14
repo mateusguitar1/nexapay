@@ -39,9 +39,9 @@ class Kernel extends ConsoleKernel
 
         // Sequence by time execute
 
-        // $schedule->command('checkwithdrawalpixcelcoin')->cron('*/3 * * * *')->appendOutputTo('/var/www/html/fastpayments/logs/checkwithdrawalpixcelcoin.txt');
-        // $schedule->command('executeallwithdrawals')->cron('*/3 * * * *')->appendOutputTo('/var/www/html/fastpayments/logs/executeallwithdrawal.txt');
-        // $schedule->command('getstatuspixasaas:cron')->cron('*/1 * * * *')->appendOutputTo('/var/www/html/fastpayments/logs/checkstatuspixasas.txt');
+        // $schedule->command('checkwithdrawalpixcelcoin')->cron('*/3 * * * *')->appendOutputTo('/var/www/html/nexapay/logs/checkwithdrawalpixcelcoin.txt');
+        // $schedule->command('executeallwithdrawals')->cron('*/3 * * * *')->appendOutputTo('/var/www/html/nexapay/logs/executeallwithdrawal.txt');
+        // $schedule->command('getstatuspixasaas:cron')->cron('*/1 * * * *')->appendOutputTo('/var/www/html/nexapay/logs/checkstatuspixasas.txt');
 
     }
 

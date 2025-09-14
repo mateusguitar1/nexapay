@@ -231,9 +231,9 @@ class CheckHookPIXBS2 implements ShouldQueue
                 ];
 
                 if($transaction->client_id == "213"){
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_pix_job_bdg.txt",json_encode($post_register));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/get_webhook_pix_job_bdg.txt",json_encode($post_register));
                 }else{
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/get_webhook_pix_job.txt",json_encode($post_register));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/get_webhook_pix_job.txt",json_encode($post_register));
                 }
 
                 if($http_status == "200"){

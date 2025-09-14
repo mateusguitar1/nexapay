@@ -125,11 +125,11 @@ class PerformWithdrawalPIXHUBAPIANYNEW implements ShouldQueue
 
         $path_name = "hubapi-return-dict-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($checkPixKey));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($checkPixKey));
 
         if(!isset($checkPixKey['document'])){
             exit();
@@ -158,11 +158,11 @@ class PerformWithdrawalPIXHUBAPIANYNEW implements ShouldQueue
 
         $path_name = "hubapi-perform-withdraw-new-manual-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data));
 
         $curl = curl_init();
 
@@ -196,11 +196,11 @@ class PerformWithdrawalPIXHUBAPIANYNEW implements ShouldQueue
 
         $path_name = "hubapi-cashout-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_response));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
 
         if(isset($get_response['conciliationId'])){
 

@@ -201,8 +201,8 @@ class ApproveCallbackController extends Controller
 
         $path_name = "response-send-callback-merchant-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
         $resp = [
@@ -221,7 +221,7 @@ class ApproveCallbackController extends Controller
             "response_merchant" => $response
         ];
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($resp));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($resp));
 
         // close the connection, release resources used
         curl_close($ch);
@@ -424,7 +424,7 @@ class ApproveCallbackController extends Controller
                     $response = curl_exec($ch);
                     $http_status  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/send-callback-approve-manual-admin.txt",json_encode($response));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/send-callback-approve-manual-admin.txt",json_encode($response));
 
                     // close the connection, release resources used
                     curl_close($ch);
@@ -554,7 +554,7 @@ class ApproveCallbackController extends Controller
             $response = curl_exec($ch);
             $http_status  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-            $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/send-callback-approve-manual-admin.txt",json_encode($response));
+            $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/send-callback-approve-manual-admin.txt",json_encode($response));
 
             // close the connection, release resources used
             curl_close($ch);

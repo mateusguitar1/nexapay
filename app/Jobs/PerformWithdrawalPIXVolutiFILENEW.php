@@ -132,11 +132,11 @@ class PerformWithdrawalPIXVolutiFILENEW implements ShouldQueue
 
         $path_name = "volutinew-token-withdraw-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($getTokenVoluti));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($getTokenVoluti));
 
         $url = "https://accounts.voluti.com.br/api/v2/pix/payments/dict";
 
@@ -160,11 +160,11 @@ class PerformWithdrawalPIXVolutiFILENEW implements ShouldQueue
 
         $path_name = "volutinew-withdraw-data-send-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($postData));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($postData));
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -191,21 +191,21 @@ class PerformWithdrawalPIXVolutiFILENEW implements ShouldQueue
 
             $path_name = "volutinew-save-error-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
-            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["error" => print_r($response)]));
+            $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["error" => print_r($response)]));
 
 			// print_r(curl_error($ch));
 
             // $path_name = "volutinew-cashout-error-".date("Y-m-d");
 
-            // if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            //     mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            // if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            //     mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             // }
 
-            // $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode(["error" => print_r(curl_error($ch))]));
+            // $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["error" => print_r(curl_error($ch))]));
 
             curl_close($ch);
             exit();
@@ -223,11 +223,11 @@ class PerformWithdrawalPIXVolutiFILENEW implements ShouldQueue
 
         $path_name = "volutinew-cashout-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_response));
+        $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
 
         if(isset($get_response['endToEndId'])){
 

@@ -202,11 +202,11 @@ class ApproveHookPIXShipay implements ShouldQueue
 
                     $path_name = "send-webhook-merchant-shipay-".date("Y-m-d");
 
-                    if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                        mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                     }
 
-                    $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($post_register));
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($post_register));
 
                     if($http_status == "200"){
 

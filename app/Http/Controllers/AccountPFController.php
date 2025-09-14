@@ -107,8 +107,8 @@ class AccountPFController extends Controller
 
             $path_name = "fastlogs-token-celcoin-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -118,7 +118,7 @@ class AccountPFController extends Controller
                 "retur_celcoin" => $token_celcoin
             ];
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",
@@ -275,8 +275,8 @@ class AccountPFController extends Controller
 
             $path_name = "fastlogs-token-celcoin-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $payload = [
@@ -286,7 +286,7 @@ class AccountPFController extends Controller
                 "retur_celcoin" => $token_celcoin
             ];
 
-            $this->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
+            $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/tokencelcoinlog.txt",json_encode($payload));
 
             $ar = array(
                 "code" => "558",

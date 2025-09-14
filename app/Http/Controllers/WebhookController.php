@@ -19,7 +19,7 @@ class WebhookController extends Controller
 
         $payload = json_decode($request->getContent(),true);
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/webhook-bs2.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/webhook-bs2.txt",json_encode($payload));
 
         $row = Transactions::where("data_bank","=",$payload['NossoNumeroBoleto'])
             ->first();
@@ -61,7 +61,7 @@ class WebhookController extends Controller
 
         $payload = json_decode($request->getContent(),true);
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/webhook-bs2-ted.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/webhook-bs2-ted.txt",json_encode($payload));
 
         return response()->json(array("message" => "success", "body" => $payload));
 
@@ -73,7 +73,7 @@ class WebhookController extends Controller
 
         $payload = json_decode($request->getContent(),true);
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/webhook-bs2-extrato.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/webhook-bs2-extrato.txt",json_encode($payload));
 
         return response()->json(array("message" => "success", "body" => $payload));
 
@@ -85,7 +85,7 @@ class WebhookController extends Controller
 
         $payload = json_decode($request->getContent(),true);
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/pixbs2.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/pixbs2.txt",json_encode($payload));
 
         if(isset($payload['pix'][0])){
 
@@ -136,11 +136,11 @@ class WebhookController extends Controller
 
         $path_name = "fastlogs-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/openpixwebhook.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/openpixwebhook.txt",json_encode($payload));
 
         if(isset($payload['event'])){
             if($payload['event'] == "OPENPIX:TRANSACTION_RECEIVED"){
@@ -234,11 +234,11 @@ class WebhookController extends Controller
 
         $path_name = "asas-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         if(isset($payload['event'])){
             if($payload['event'] == "PAYMENT_RECEIVED"){
@@ -291,11 +291,11 @@ class WebhookController extends Controller
 
         $path_name = "get-webhook-voluti-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
             if(isset($payload['data']['operation'])){
                 if($payload['data']['operation'] == "cashin"){
@@ -359,8 +359,8 @@ class WebhookController extends Controller
 
                         $path_name = "voluti-webhook-payment-".date("Y-m-d");
 
-                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                         }
 
                         $data_request = [
@@ -371,7 +371,7 @@ class WebhookController extends Controller
                             "client_id" => $client->id
                         ];
 
-                        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_request));
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_request));
 
                         if($payload['data']['status'] == "paid"){
 
@@ -414,11 +414,11 @@ class WebhookController extends Controller
 
         $path_name = "get-webhook-luxtak-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         if(isset($payload['out_trade_no'])){
 
@@ -484,11 +484,11 @@ class WebhookController extends Controller
 
         $path_name = "get-webhook-withdraw-luxtak-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         // return response()->json(["status" => "success", "message" => "received"]);
 
@@ -552,11 +552,11 @@ class WebhookController extends Controller
 
         $path_name = "get-webhook-voluti-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         if(isset($payload['type'])){
             if($payload['type'] == 'transaction'){
@@ -619,8 +619,8 @@ class WebhookController extends Controller
 
                         $path_name = "hubapi-webhook-payment-".date("Y-m-d");
 
-                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                         }
 
                         $data_request = [
@@ -631,7 +631,7 @@ class WebhookController extends Controller
                             "client_id" => $client->id
                         ];
 
-                        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_request));
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_request));
 
                         if($payload['data']['status'] == "paid"){
 
@@ -721,8 +721,8 @@ class WebhookController extends Controller
 
                         $path_name = "voluti-webhook-payment-".date("Y-m-d");
 
-                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                         }
 
                         $data_request = [
@@ -733,7 +733,7 @@ class WebhookController extends Controller
                             "client_id" => $client->id
                         ];
 
-                        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_request));
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_request));
 
                         if($payload['data']['status'] == "paid"){
 
@@ -776,11 +776,11 @@ class WebhookController extends Controller
 
         $path_name = "deposit-webhook-volutinew-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         if(isset($payload['data']['txId'])){
 
@@ -849,11 +849,11 @@ class WebhookController extends Controller
 
         $path_name = "withdraw-webhook-volutinew-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         $conciliationId = $payload['data']['endToEndId'];
         $transaction = Transactions::where("type_transaction","withdraw")->where("status","pending")->where("payment_id",$conciliationId)->first();
@@ -894,18 +894,18 @@ class WebhookController extends Controller
 
         $path_name = "get-webhook-celcoin-new-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         if($hash == "Basic Y2VsY29pbndlYmhvb2s6MnFJaEMwVmxMdzFnSW9m"){
 
             $path_name = "celcoin-authenticated-new-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
             $data_request_auth = [
@@ -913,7 +913,7 @@ class WebhookController extends Controller
                 "created_at" => date("Y-m-d H:i:s")
             ];
 
-            $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_request_auth));
+            $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_request_auth));
 
             if(isset($payload['RequestBody']['EndToEndId'])){
                 if($payload['RequestBody']['TransactionType'] == "RECEIVEPIX"){
@@ -1104,8 +1104,8 @@ class WebhookController extends Controller
 
                         $path_name = "celcoin-webhook-payment-".date("Y-m-d");
 
-                        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
                         }
 
                         $data_request = [
@@ -1116,7 +1116,7 @@ class WebhookController extends Controller
                             "client_id" => $client->id
                         ];
 
-                        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($data_request));
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_request));
 
                         if($payload['RequestBody']['StatusCode']['StatusId'] == "2"){
 
@@ -1151,11 +1151,11 @@ class WebhookController extends Controller
         }else{
             $path_name = "celcoin-unauthenticated-".date("Y-m-d");
 
-            if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-                mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+            if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
             }
 
-            $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+            $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
             return response()->json(["message" => "error", "reason" => "Basic Authentication Invalid"]);
         }
@@ -1170,11 +1170,11 @@ class WebhookController extends Controller
 
         $path_name = "webhook-shipay-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($payload));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
 
         $payment_id = $payload['order_id'];
 
@@ -1192,11 +1192,11 @@ class WebhookController extends Controller
 
         $path_name = "status-shipay-".date("Y-m-d");
 
-        if (!file_exists('/var/www/html/fastpayments/logs/'.$path_name)) {
-            mkdir('/var/www/html/fastpayments/logs/'.$path_name, 0777, true);
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
         }
 
-        $FunctionsController->registerRecivedsRequests("/var/www/html/fastpayments/logs/".$path_name."/log.txt",json_encode($get_status));
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($get_status));
 
         if($get_status['status'] == "approved"){
 
