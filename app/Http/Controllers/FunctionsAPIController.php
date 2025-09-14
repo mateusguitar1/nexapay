@@ -9781,9 +9781,11 @@ class FunctionsAPIController extends Controller
                     ]
             ],
             "products" => [
-                "description" => "Pedido n ".$params['pedido'],
+                array(
+                    "description" => "Pedido n ".$params['pedido'],
                 "quantity" => 1,
                 "value" => $params['amount']
+                )
             ]
         ];
 
