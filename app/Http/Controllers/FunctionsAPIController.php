@@ -9792,7 +9792,7 @@ class FunctionsAPIController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://sandbox.ws.suitpay.app/api/v1/gateway/request-qrcode',
+        CURLOPT_URL => 'https://ws.suitpay.app/api/v1/gateway/request-qrcode',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
