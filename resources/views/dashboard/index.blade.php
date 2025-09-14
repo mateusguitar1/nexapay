@@ -488,9 +488,9 @@ h3{
                         $(".show_request_account").html("");
                         $(".show_request_account").append("<br/>");
                         $(".show_request_account").append("<center><p>Após pagar o QrCode PIX, atulize a página para visualizar seu saldo atualizado!</p></center>");
-                        $(".show_request_account").append("<center><img src='"+response.link_qr+"' style='width:100%;' alt='QrCode' /></center>");
+                        $(".show_request_account").append("<center><img src='https://image-charts.com/chart?chs=250x250&cht=qr&chl="+response.content_qr+"' style='width:100%;' alt='QrCode' /></center>");
                         $(".show_request_account").append("<br/>");
-                        $(".show_request_account").append("<div class='input-group has-validation'><input type='text' id='copypaste' value='"+response.content_qr+"' class='form-control'><div class='input-group-text' style='cursor: pointer;background: #42a7d2;padding: 16px 15px 15px 15px;color: #fff;' onclick='copyToClipboard()'>COPY</div></div>");
+                        $(".show_request_account").append("<div class='input-group has-validation'><input type='text' id='copypaste' value='"+response.content_qr+"' class='form-control'><div class='input-group-text' style='cursor: pointer;background: #42a7d2;padding: 6px 15px;color: #fff;' onclick='copyToClipboard()'>COPY</div></div>");
                         $(".show_request_account").append("<br/>");
                     }else{
                         $(".message_toast_error").html(response.content)
