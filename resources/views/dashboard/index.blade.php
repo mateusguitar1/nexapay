@@ -552,20 +552,12 @@ h3{
 
                             // console.log(response);
 
-                            if(response.message == "pending"){
+                            if(response.status == "pending"){
                                 Swal.fire(
                                     'Success!',
                                     'Saque em processamento, aguarde...',
                                     'success'
                                 );
-                            }
-
-                            if(response.status == "400"){
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: response.originalError.error.message,
-                                    icon: 'warning',
-                                });
                             }
 
                             if(response.code == "0443"){
