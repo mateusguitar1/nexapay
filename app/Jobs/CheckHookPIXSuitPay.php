@@ -51,7 +51,7 @@ class CheckHookPIXSuitPay implements ShouldQueue
             $ck = json_decode($webhook['body'],true);
             $payment_id = $ck['idTransaction'];
 
-            if($payment_id == $transaction->code){
+            if($payment_id == $transaction->payment_id){
 
                 $paid_date = date("Y-m-d H:i:s");
                 $clients = Clients::where("id","=",$transaction->client_id)->first();
