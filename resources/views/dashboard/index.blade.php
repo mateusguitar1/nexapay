@@ -155,10 +155,9 @@ h3{
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="show_request_account"></div>
                                     </div>
                                     <div class="modal-footer hidden_after_account">
-                                        <button type="submit" class="btn btn-success pull-right" style="width:100%;">GENERATE <i class="fa fa-qrcode" aria-hidden="true"></i></button>
+                                        <button type="submit" class="btn btn-success pull-right" style="width:100%;" data-toggle="modal" data-target="#showPix">GENERATE <i class="fa fa-qrcode" aria-hidden="true"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -198,7 +197,6 @@ h3{
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="show_request_account"></div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success pull-right" style="width:100%;">ENVIAR PIX <i class="fa fa-dollar-sign"></i></button>
@@ -400,6 +398,28 @@ h3{
       </div>
     </section>
     <!-- /.content -->
+
+<!-- Modal -->
+<div class="modal fade" id="showPix" tabindex="-1" role="dialog" aria-labelledby="showPixLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 1024px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>PAGAMENTO POR PIX</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="show_request_account"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('js')
@@ -439,6 +459,51 @@ h3{
 
         $('.datepicker_start').mask('00/00/0000');
         $('.datepicker_end').mask('00/00/0000');
+
+        $('#formcreatePixAccount').submit(function(e){
+            e.preventDefault();
+
+            $(".show_request_account").html("<br/><div class='text-center'><i class='material-icons fa-spin fa-3x'>refresh</i></div>");
+
+            var amount_solicitation = $(".amount_solicitation_deposit_pix").val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url:"{{ switchUrl('merchants/charge') }}",
+                method:"POST",
+                data:{
+                    amount : amount_solicitation
+                },
+                success:function(response){
+                    console.log(response);
+
+                    if(response.link_qr){
+                        $(".hidden_after_account").css("display","none");
+
+                        $(".show_request_account").html("");
+                        $(".show_request_account").append("<br/>");
+                        $(".show_request_account").append("<center><p>Após pagar o QrCode PIX, atulize a página para visualizar seu saldo atualizado!</p></center>");
+                        $(".show_request_account").append("<center><img src='"+response.link_qr+"' style='width:100%;' alt='QrCode' /></center>");
+                        $(".show_request_account").append("<br/>");
+                        $(".show_request_account").append("<div class='input-group has-validation'><input type='text' id='copypaste' value='"+response.content_qr+"' class='form-control'><div class='input-group-text' style='cursor: pointer;background: #42a7d2;padding: 16px 15px 15px 15px;color: #fff;' onclick='copyToClipboard()'>COPY</div></div>");
+                        $(".show_request_account").append("<br/>");
+                    }else{
+                        $(".message_toast_error").html(response.content)
+                        $(".dangerToast").toast('show');
+                    }
+
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+
+        });
 
     })
 </script>

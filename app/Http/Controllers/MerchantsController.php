@@ -490,4 +490,56 @@ class MerchantsController extends Controller
         return view('merchants.postman');
     }
 
+    public function charge(Request $request){
+        $FunctionsAPIController = new FunctionsAPIController();
+
+        if(auth()->user()->level == "master"){
+            $token = Clients::where("id",8)->key->authorization;
+        }else{
+            $token = auth()->user()->client->key->authorization;
+        }
+
+        $data = [
+            "order_id" => "NXP".generateRandomString(10),
+            "user_id" => "1234567",
+            "user_document" => "91969747021",
+            "amount" => $FunctionsAPIController->strtodouble($request->amount),
+            "method" => "pix",
+            "user_address" => "---",
+            "user_district" => "---",
+            "user_city" => "---",
+            "user_uf" => "---",
+            "user_cep" => "---"
+        ];
+
+        return response()->json(["token" => $token]);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://apirestnexapay.fastpayments.com.br/api/deposit",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => array(
+                'Token: '.$token,
+                'Accept: application/json',
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $return = json_decode($response,true);
+
+        return response()->json($return);
+    }
+
 }

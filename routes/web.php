@@ -73,6 +73,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/merchants/update_webhook', '\App\Http\Controllers\MerchantsController@update_webhook')->name('merchants'); //url callback withdraw
     Route::get('/download-postman-collection', '\App\Http\Controllers\MerchantsController@postmanCollection');
 
+    Route::post('merchants/charge', '\App\Http\Controllers\MerchantsController@charge')->name('merchants');
+
     Route::get('/myinfo', '\App\Http\Controllers\MerchantsController@info')->name('merchants');
 
     Route::get('/clientapi', '\App\Http\Controllers\MerchantsController@api')->name('clientapi'); // Merchant API
