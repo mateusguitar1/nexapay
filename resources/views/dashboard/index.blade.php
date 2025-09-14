@@ -463,7 +463,7 @@ h3{
         $('#formcreatePixAccount').submit(function(e){
             e.preventDefault();
 
-            $(".show_request_account").html("<br/><div class='text-center'><i class='fa fa-refresh fa-spin fa-3x'></i></div>");
+            $(".show_request_account").html("<br/><div class='text-center'><i class='fas fa-sync fa-spin fa-3x'></i></div>");
 
             var amount_solicitation = $(".amount_solicitation_deposit_pix").val();
 
@@ -480,7 +480,7 @@ h3{
                     amount : amount_solicitation
                 },
                 success:function(response){
-                    console.log(response);
+                    //console.log(response);
 
                     // if(response.link_qr){
                     //     $(".hidden_after_account").css("display","none");
