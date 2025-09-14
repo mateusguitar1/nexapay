@@ -1258,7 +1258,7 @@ class DepositController extends Controller
             case"787":
                 // Acesso SuitPay
                 $ci = $client->bankPix->client_id_celcoin;
-                $cl = $client->bankPix->client_secret_celcoin;
+                $cs = $client->bankPix->client_secret_celcoin;
 
                 $params_array = array(
                     'client_id' => $client->id,
@@ -1281,7 +1281,7 @@ class DepositController extends Controller
                     'cep_usuario' => $cep_usuario,
                     'numero_endereco' => mt_rand(1,1999),
                     'ci' => $ci,
-                    'cl' => $cl,
+                    'cs' => $cs,
                     'pixkey' => $pixkey,
                     'expiration' => $expiration,
                 );
