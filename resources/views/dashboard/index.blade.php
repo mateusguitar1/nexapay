@@ -156,7 +156,7 @@ h3{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer hidden_after_account">
+                                    <div class="modal-footer">
                                         <button type="submit" class="btn btn-success pull-right" style="width:100%;" data-toggle="modal" data-target="#showPix">GENERATE <i class="fa fa-qrcode" aria-hidden="true"></i></button>
                                     </div>
                                 </form>
@@ -482,20 +482,20 @@ h3{
                 success:function(response){
                     console.log(response);
 
-                    if(response.link_qr){
-                        $(".hidden_after_account").css("display","none");
+                    // if(response.link_qr){
+                    //     $(".hidden_after_account").css("display","none");
 
-                        $(".show_request_account").html("");
-                        $(".show_request_account").append("<br/>");
-                        $(".show_request_account").append("<center><p>Após pagar o QrCode PIX, atulize a página para visualizar seu saldo atualizado!</p></center>");
-                        $(".show_request_account").append("<center><img src='https://image-charts.com/chart?chs=250x250&cht=qr&chl="+response.content_qr+"' style='width:100%;' alt='QrCode' /></center>");
-                        $(".show_request_account").append("<br/>");
-                        $(".show_request_account").append("<div class='input-group has-validation'><input type='text' id='copypaste' value='"+response.content_qr+"' class='form-control'><div class='input-group-text' style='cursor: pointer;background: #42a7d2;padding: 6px 15px;color: #fff;' onclick='copyToClipboard()'>COPY</div></div>");
-                        $(".show_request_account").append("<br/>");
-                    }else{
-                        $(".message_toast_error").html(response.content)
-                        $(".dangerToast").toast('show');
-                    }
+                    //     $(".show_request_account").html("");
+                    //     $(".show_request_account").append("<br/>");
+                    //     $(".show_request_account").append("<center><p>Após pagar o QrCode PIX, atulize a página para visualizar seu saldo atualizado!</p></center>");
+                    //     $(".show_request_account").append("<center><img src='https://image-charts.com/chart?chs=250x250&cht=qr&chl="+response.content_qr+"' style='width:100%;' alt='QrCode' /></center>");
+                    //     $(".show_request_account").append("<br/>");
+                    //     $(".show_request_account").append("<div class='input-group has-validation'><input type='text' id='copypaste' value='"+response.content_qr+"' class='form-control'><div class='input-group-text' style='cursor: pointer;background: #42a7d2;padding: 6px 15px;color: #fff;' onclick='copyToClipboard()'>COPY</div></div>");
+                    //     $(".show_request_account").append("<br/>");
+                    // }else{
+                    //     $(".message_toast_error").html(response.content)
+                    //     $(".dangerToast").toast('show');
+                    // }
 
                 },
                 error:function(err){
