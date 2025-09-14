@@ -175,10 +175,11 @@ h3{
                                 </div>
                             </div>
                             <div class="card-body px-0 pb-2">
-                                <form id="formcreatePixAccount" method="post">
+                                <form id="formSendPixAccount" method="post">
                                     <div class="modal-body">
+                                        <h6>PIX POR CHAVE</h6>
+
                                         <div class="row">
-                                            <h6>PIX POR CHAVE</h6>
                                             <div class="col-md-4 mb-3">
                                                 <select name="type_key" id="type_key" class="form-control type_key">
                                                     <option value="CPF">CPF</option>
@@ -196,31 +197,6 @@ h3{
                                                     <input name="amount_solicitation_send_pix" type="text" placeholder="Amount BRL" class="form-control money_pix width100 text-left amount_solicitation_send_pix" style="text-align:right;" maxlength="22" onfocus="focused(this)" onfocusout="defocused(this)">
                                                 </div>
                                             </div>
-
-                                            {{-- <div class="col-md-4 margin15 mb-4">
-
-                                                <select name="type_key" id="type_key" class="form-control type_key">
-                                                    <option value="CPF">CPF</option>
-                                                    <option value="CNPJ">CNPJ</option>
-                                                    <option value="PHONE">TELEFONE</option>
-                                                    <option value="EMAIL">EMAIL</option>
-                                                    <option value="EVP">ALEATÓRIA</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-4 margin15">
-                                                <h6>Descrição</h6>
-                                                <div class="input-group">
-                                                    <input required="" name="description" type="text" value="" class="form-control width100 text-right" style="text-align:right;" placeholder="Description">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 margin15">
-                                                <h6>Descrição</h6>
-                                                <div class="input-group">
-                                                    <input required="" name="description" type="text" value="" class="form-control width100 text-right" style="text-align:right;" placeholder="Description">
-                                                </div>
-                                            </div> --}}
                                         </div>
                                         <div class="show_request_account"></div>
                                     </div>
@@ -228,7 +204,7 @@ h3{
                                         <button type="submit" class="btn btn-success pull-right" style="width:100%;">GENERATE <i class="fa fa-qrcode" aria-hidden="true"></i></button>
                                     </div>
                                 </form>
-                                <form id="formSendPixAccount" method="post">
+                                {{-- <form id="formSendPixAccount" method="post">
                                     <div class="modal-body">
                                         <div class="row">
 
@@ -260,7 +236,7 @@ h3{
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success pull-right" style="width:100%;">ENVIAR PIX <i class="fa fa-dollar-sign"></i></button>
                                     </div>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                     </div>
