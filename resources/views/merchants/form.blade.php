@@ -315,6 +315,13 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <input type="hidden" name="tax[remittance_percent]" id="remittance_percent" value="{{ $data['model'] ? number_format($data['taxs']->remittance_percent,"2",",",".") : old('remittance_percent', '') }}" maxlength="5" class='form-control money'>
+                                <input type="hidden" name="tax[remittance_absolute]" id="remittance_absolute" value="{{ $data['model'] ? number_format($data['taxs']->remittance_absolute,"2",",",".") : old('remittance_absolute', '') }}" class='form-control money'>
+                                <input type="hidden" name="tax[withdraw_pix_percent]" id="withdraw_pix_percent" value="{{ $data['model'] ? number_format($data['taxs']->withdraw_pix_percent,"2",",",".") : old('withdraw_pix_percent', '') }}" maxlength="5" class='form-control money'>
+                                <input type="hidden" name="tax[withdraw_pix_absolute]" id="withdraw_pix_absolute" value="{{ $data['model'] ? number_format($data['taxs']->withdraw_pix_absolute,"2",",",".") : old('withdraw_pix_absolute', '') }}" class='form-control money'>
+                                <input type="hidden" name="tax[min_fee_withdraw_pix]" id="min_fee_withdraw_pix" value="{{ $data['model'] ? number_format($data['taxs']->min_fee_withdraw_pix,"2",",",".") : old('min_fee_withdraw_pix', '') }}" class='form-control money'>
+                                <input type="hidden" name="tax[min_withdraw_pix]" id="min_withdraw_pix" value="{{ $data['model'] ? number_format($data['taxs']->min_withdraw_pix,"2",",",".") : old('min_withdraw_pix', '') }}" class='form-control money'>
+                                <input type="hidden" name="tax[max_withdraw_pix]" id="max_withdraw_pix" value="{{ $data['model'] ? number_format($data['taxs']->max_withdraw_pix,"2",",",".") : old('max_withdraw_pix', '') }}" class='form-control money'>
                                 {{-- <tr>
                                     <td width="5%">Withdraw</td>
                                     <td width="5%">Transfer</td>
