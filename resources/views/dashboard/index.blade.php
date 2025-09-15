@@ -493,8 +493,7 @@ h3{
                         $(".show_request_account").append("<div class='input-group has-validation'><input type='text' id='copypaste' value='"+response.content_qr+"' class='form-control'><div class='input-group-text' style='cursor: pointer;background: #42a7d2;padding: 6px 15px;color: #fff;' onclick='copyToClipboard()'>COPY</div></div>");
                         $(".show_request_account").append("<br/>");
                     }else{
-                        $(".message_toast_error").html(response.content)
-                        $(".dangerToast").toast('show');
+                        $(".show_request_account").html(response.message);
                     }
 
                 },
