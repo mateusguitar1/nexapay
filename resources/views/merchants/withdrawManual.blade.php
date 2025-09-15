@@ -60,7 +60,7 @@ $client = \App\Models\Clients::where("id",auth()->user()->client_id)->first();
           {{-- @if($client->withdraw_permition === true)
             <a href="#!" data-toggle="modal" data-target="#add_batch_withdraw" class="btn btn-warning"></i>PIX Batch</a> &nbsp;&nbsp;
           @endif --}}
-          <a href="#!" data-toggle="modal" data-target="#add_manual_withdraw" class="btn btn-primary"></i>New Withdraw</a>
+          {{-- <a href="#!" data-toggle="modal" data-target="#add_manual_withdraw" class="btn btn-primary"></i>New Withdraw</a> --}}
         </div>
       </div>
     </div>
