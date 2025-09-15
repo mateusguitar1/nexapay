@@ -95,7 +95,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/logs/search', '\App\Http\Controllers\LogsController@search')->name('logs')->middleware('adminaccess');
 
     Route::get('/user/{user}/freeze', '\App\Http\Controllers\UserController@freeze');
-    Route::resource('/users', '\App\Http\Controllers\UserController');
+    Route::resource('/users', '\App\Http\Controllers\UserController')->middleware('adminaccess');
 
     Route::get('/user/2fa', '\App\Http\Controllers\UserController@user2fa');
     Route::post('/user/save2fa', '\App\Http\Controllers\UserController@save2fa');
