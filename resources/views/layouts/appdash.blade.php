@@ -272,14 +272,15 @@
                             </a>
                         </li>
                         @endif
-                        @if(Auth::user()->level != 'crypto')
+                        @if(Auth::user()->level == 'master')
                         <li class="nav-item menu-open">
                             <a href="{{switchUrl('/users')}}" class="nav-link @if(strpos($route,'users')  !== false) active @endif">
                                 <p>Users</p>
                                 <i class="nav-icon fas fa-users float-right"></i>
                             </a>
                         </li>
-
+                        @endif
+                        @if(Auth::user()->level == 'master')
                         <li class="nav-item menu-open">
                             <a href="{{switchUrl('/logs')}}" class="nav-link @if($route == "logs") active @endif">
                                 <p>Logs</p>
