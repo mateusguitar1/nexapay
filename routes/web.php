@@ -91,8 +91,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/banks/getBalanceCelcoin', '\App\Http\Controllers\BanksController@getBalanceCelcoin');
 
-    Route::get('/logs', '\App\Http\Controllers\LogsController@index')->name('logs');
-    Route::post('/logs/search', '\App\Http\Controllers\LogsController@search')->name('logs');
+    Route::get('/logs', '\App\Http\Controllers\LogsController@index')->name('logs')->middleware('adminaccess');
+    Route::post('/logs/search', '\App\Http\Controllers\LogsController@search')->name('logs')->middleware('adminaccess');
 
     Route::get('/user/{user}/freeze', '\App\Http\Controllers\UserController@freeze');
     Route::resource('/users', '\App\Http\Controllers\UserController');
