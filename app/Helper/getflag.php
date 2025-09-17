@@ -124,6 +124,10 @@ function getFlag($flag,$name = null,$width=30){
 			$icon = "<image src='".asset("img/suitpay.png")."' width='".$width."'/>";
 			$text = 'suitpay';
 		break;
+        case "788":
+			$icon = "<image src='".asset("img/metapay.png")."' width='".$width."'/>";
+			$text = 'metapay';
+		break;
         case "844":
 			$icon = "<image src='".asset("img/hubapi.png")."' width='".$width."'/>";
 			$text = 'hubapi';
