@@ -3429,6 +3429,161 @@ class FunctionsAPIController extends Controller
 
     }
 
+    public function createTransactionPIXMETAPAY($params = array()){
+
+        $clients = Clients::where("id","=",$params['client_id'])->first();
+
+        $pixMetaPay = json_decode($this->registerPIXMETAPAY($params),true);
+
+        if(isset($pixMetaPay['qrcode_text'])){
+
+            $dados = $pixMetaPay['qrcode_text'];
+            $payment_id = $pixMetaPay['transaction_id'];
+            $date = date("Y-m-d H:i:s");
+            $barcode = "";
+
+            $check_count = strlen($dados);
+
+            if($check_count < 10){
+
+                $path_name = "nexalogs-pix-metapay-".date("Y-m-d");
+
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                }
+
+                $payload = [
+                    "date" => $date,
+                    "client" => $clients->name,
+                    "params" => $params,
+                    "return_metapay" => $pixMetaPay
+                ];
+
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/pixlog.txt",json_encode($payload));
+
+                $ar = array(
+                    "code" => "546",
+                    "message" => "Erro on create QrCode PIX ".$params['pedido'],
+                    "return" => $pixMetaPay
+                );
+
+                return response()->json($ar,422);
+
+            }
+
+            // GET DAYS SAFE
+            $days_safe_pix = $clients->days_safe_pix;
+
+            // GET BANK DATA
+            $bank = $clients->bankPix;
+            $link_callback_bank = "";
+
+            $user_data = array(
+                "name" => $params['nome_usuario'],
+                "document" => $params['documento_usuario'],
+                "bank_name" => $bank->name,
+                "holder" => $bank->holder,
+                "agency" => $bank->agency,
+                "account_number" => $bank->account,
+                "operation_bank" => $bank->type_account,
+                "user_id" => $params['user_id'],
+                "client_id" => $params['client_id'],
+                "address" => $this->trata_unicode($params['endereco_usuario']),
+                "district" => $this->trata_unicode($params['bairro_usuario']),
+                "city" => $this->trata_unicode($params['cidade_usuario']),
+                "uf" => $params['uf_usuario'],
+                "cep" => $params['cep_usuario']
+            );
+
+            $user_account_data = base64_encode(json_encode($user_data));
+
+            // Taxas
+            $tax = $clients->tax;
+
+            $cotacao_dolar_markup = "1";
+            $cotacao_dolar = "1";
+            $spread_deposit = "0";
+
+            $final_amount = $params['amount'];
+            $percent_fee = ($final_amount * ($tax->pix_percent / 100));
+            $fixed_fee = $tax->pix_absolute;
+            if(!is_numeric($fixed_fee)){ $fixed_fee = 0; }
+            $comission = ($percent_fee + $fixed_fee);
+            if($comission < $tax->min_fee_pix){ $comission = $tax->min_fee_pix; $min_fee = $tax->min_fee_pix; }else{ $min_fee = "NULL"; }
+
+
+            $data_invoice_id = NULL;
+
+            DB::beginTransaction();
+            try {
+
+                // Insert Transaction
+                $transaction = Transactions::create([
+                    "solicitation_date" => $date,
+                    "final_date" => $date,
+                    "due_date" => date("Y-m-d",strtotime($date."+ ".$days_safe_pix." days")),
+                    "code" => $params['pedido'],
+                    "client_id" => $params['client_id'],
+                    "order_id" => $params['order_id'],
+                    "user_id" => $params['user_id'],
+                    "user_document" => $params['documento_usuario'],
+                    "user_account_data" => $user_account_data,
+                    "user_name" => $params['nome_usuario'],
+                    "id_bank" => $clients->bankPix->id,
+                    "type_transaction" => 'deposit',
+                    "method_transaction" => 'pix',
+                    "amount_solicitation" => $params['amount'],
+                    "final_amount" => $final_amount,
+                    "status" => 'pending',
+                    "bank_data" => $dados,
+                    "payment_id" => $payment_id,
+                    "code_bank" => $bank->code,
+                    "link_callback_bank" => $link_callback_bank,
+                    "url_retorna" => "",
+                    "data_invoice_id" => $data_invoice_id,
+                    "quote" => $cotacao_dolar,
+                    "percent_markup" => $spread_deposit,
+                    "quote_markup" => $cotacao_dolar_markup,
+                ]);
+
+                DB::commit();
+
+                $link_qr = "https://image-charts.com/chart?chs=350x350&cht=qr&chl=".$dados;
+
+                $json_return = array(
+                    "order_id" => $params['order_id'],
+                    "solicitation_date" => $date,
+                    "due_date" => date("Y-m-d",strtotime($date."+ ".$days_safe_pix." days")),
+                    "code_identify" => $params['pedido'],
+                    "amount" => $params['amount'],
+                    "status" => "pending",
+                    "link_qr" => $link_qr,
+                    "content_qr" => $dados
+                );
+
+                $path_name = "nexalogs-pix-metpay-success-".date("Y-m-d");
+
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                }
+
+                $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["json_return" => $json_return, "return_metapay" => $pixMetaPay]));
+
+                // Success
+                return response()->json($json_return,200);
+
+            }catch(exception $e){
+                DB::roolback();
+            }
+
+        }else{
+
+            return response()->json($pixMetaPay);
+
+        }
+
+    }
+
     // Create deposit PIX Celcoin
     public function createTransactionPIXCELCOIN($params = array()){
 
@@ -6912,6 +7067,26 @@ class FunctionsAPIController extends Controller
 
                                         \App\Jobs\PerformWithdrawalPIXSuitPay::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
 
+                                    }elseif($params['method'] == "pix" && $bank_withdraw->code == "788"){
+
+                                        $return_info = [
+                                            "bank_withdraw_code" => $bank_withdraw->code,
+                                            "bank_id" => $bank_withdraw->id,
+                                            "transaction_id" => $transaction->id,
+                                            "order_id" => $transaction->order_id,
+                                            "permitted" => "permitted"
+                                        ];
+
+                                        $path_name = "metapay-permition-withdraw-".date("Y-m-d");
+
+                                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                                        }
+
+                                        $this->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($return_info));
+
+                                        \App\Jobs\PerformWithdrawalPIXMetaPay::dispatch($transaction->id,$bank_withdraw->id)->delay(now()->addSeconds('5'));
+
                                     }else{
 
                                         $return_info = [
@@ -9837,6 +10012,49 @@ class FunctionsAPIController extends Controller
     }
 
     // end integration SuitPay
+
+    // strat integration MetaPay //
+
+    public function registerPIXMETAPAY($params = array()){
+
+        $data = [
+            "amount" => $params['amount'],
+            "external_id" => $params['pedido'],
+            "clientCallbackUrl" => "https://hooknexapay.financebaking.com/api/suitpayhook",
+            "payer" => [
+                "name" => $params['nome_usuario'],
+                "email" => "systemnexapay@gmail.com",
+                "document" => $params['documento_usuario']
+            ]
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.metabroker.finance/ellitium/deposit',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: Bearer '.$params['access_token']
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+		return $response;
+
+    }
+
+    // end integration MetaPay
 
 
     // Functions used as inheritance

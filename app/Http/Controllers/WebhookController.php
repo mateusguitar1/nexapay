@@ -545,6 +545,126 @@ class WebhookController extends Controller
 
     }
 
+    public function metapayWebhook(Request $request){
+        $FunctionsController = new FunctionsController();
+
+        $payload = json_decode($request->getContent(),true);
+
+        $path_name = "get-webhook-metapay-".date("Y-m-d");
+
+        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+        }
+
+        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($payload));
+
+        if(isset($payload['transaction_id'])){
+            $transaction = Transactions::where("status","pending")->where("payment_id","=",$payload['transaction_id'])->first();
+
+            if($payload['type'] == "deposit"){
+
+                if($payload['status'] == "paid"){
+
+                    if(!empty($transaction)){
+
+                        $user_data = json_decode(base64_decode($transaction->user_account_data),true);
+                        $client = Clients::where("id",$transaction->client_id)->first();
+
+                        if($transaction->method_transaction == "pix"){
+
+                            if($transaction->status != "confirmed"){
+
+                                DB::beginTransaction();
+                                try{
+
+                                    $webhook = Webhook::create([
+                                        "client_id" => $client->id,
+                                        "order_id" => $transaction->order_id,
+                                        "type_register" => "pix",
+                                        "body" => json_encode($payload,true),
+                                    ]);
+
+                                    DB::commit();
+
+                                    $transaction_id = $transaction->id;
+                                    $webhook_id = $webhook->id;
+
+                                    \App\Jobs\CheckHookPIXMetaPay::dispatch($transaction_id,$webhook_id)->delay(now("2"));
+
+                                    return response()->json(["message" => "success", "transaction" => $transaction_id, "webhook" => $webhook_id]);
+
+                                }catch(exception $e){
+                                    DB::rollback();
+                                }
+
+                            }
+
+                        }else{
+                            return response()->json(["message" => "method not found"]);
+                        }
+
+                    }else{
+                        return response()->json(["message" => "transaction not found"]);
+                    }
+                }
+
+            }elseif($payload['type'] == "withdraw"){
+
+                if($payload['status'] == "paid"){
+
+                    if(!empty($transaction)){
+
+                        $user_data = json_decode(base64_decode($transaction->user_account_data),true);
+
+                        // if($transaction->client_id != "17"){
+                        $client = Clients::where("id",$transaction->client_id)->first();
+
+                        if($transaction->method_transaction == "pix"){
+
+                            if($transaction->status != "confirmed"){
+
+                                DB::beginTransaction();
+                                try{
+
+                                    $webhook = Webhook::create([
+                                        "client_id" => $client->id,
+                                        "order_id" => $transaction->order_id,
+                                        "type_register" => "pix",
+                                        "body" => json_encode($payload,true),
+                                    ]);
+
+                                    DB::commit();
+
+                                    $transaction_id = $transaction->id;
+                                    $webhook_id = $webhook->id;
+
+                                    \App\Jobs\CheckHookPIXMetaPayWithdraw::dispatch($transaction_id,$webhook_id)->delay(now("5"));
+
+                                    return response()->json(["message" => "success"]);
+
+                                }catch(exception $e){
+                                    DB::rollback();
+                                }
+
+                            }
+
+                        }else{
+                            return response()->json(["message" => "method not found"]);
+                        }
+
+                    }else{
+                        return response()->json(["message" => "transaction not found"]);
+                    }
+                }
+
+            }
+
+
+        }else{
+            return response()->json(["message" => "out other conditions", "content" => "dont have conciliationId"]);
+        }
+    }
+
     public function luxtakWebhookWithdraw(Request $request){
 
         $FunctionsController = new FunctionsController();

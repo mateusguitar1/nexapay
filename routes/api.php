@@ -176,6 +176,10 @@ Route::post('/suitpayhookwithdraw', [
     'uses' => '\App\Http\Controllers\WebhookController@suitpayWebhookWithdraw'
 ]);
 
+Route::post('/metapayhook', [
+    'uses' => '\App\Http\Controllers\WebhookController@metapayWebhook'
+]);
+
 Route::post('/luxtakwithdrawhook', [
     'uses' => '\App\Http\Controllers\WebhookController@luxtakWebhookWithdraw'
 ]);

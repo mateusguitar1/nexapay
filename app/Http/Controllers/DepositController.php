@@ -1298,6 +1298,47 @@ class DepositController extends Controller
 
             break;
 
+            case"788":
+                // Acesso SuitPay
+                $access_token = $client->bankPix->paghiper_api;
+
+                $params_array = array(
+                    'client_id' => $client->id,
+                    'user_id' => $request->user_id,
+                    'pedido' => $pedido,
+                    'order_id' => $request->order_id,
+                    'authorization' => $authentication->authorization,
+                    'data_emissao' => $data_emissao,
+                    'data_vencimento' => $data_vencimento,
+                    'data_vencimento_bs2' => $data_vencimento_bs2,
+                    'amount' => $amount,
+                    'valor_pix' => $valor_pix,
+                    'cpf' => $cpf,
+                    'nome_usuario' => $nome_usuario,
+                    'documento_usuario' => $cpf,
+                    'endereco_usuario' => $endereco_usuario,
+                    'bairro_usuario' => $bairro_usuario,
+                    'cidade_usuario' => $cidade_usuario,
+                    'uf_usuario' => $uf_usuario,
+                    'cep_usuario' => $cep_usuario,
+                    'numero_endereco' => mt_rand(1,1999),
+                    'access_token' => $access_token,
+                    'pixkey' => $pixkey,
+                    'expiration' => $expiration,
+                );
+
+                $path_name = "deposit-pix-metapay-".date("Y-m-d");
+
+                if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                    mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                }
+
+                $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($params_array));
+
+                $return = $FunctionsAPIController->createTransactionPIXMETAPAY($params_array);
+
+            break;
+
             case"844":
                 // Acesso Celcoin
                 $hubauth = $client->bankPix->access_token_celcoin;
