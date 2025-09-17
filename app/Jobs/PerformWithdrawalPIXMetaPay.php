@@ -176,7 +176,7 @@ class PerformWithdrawalPIXMetaPay implements ShouldQueue
 
 		if (curl_errno($curl)) {
 
-            $path_name = "metapay-save-error-".date("Y-m-d");
+            $path_name = "metapay-save-error-split-".date("Y-m-d");
 
             if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
                 mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
@@ -195,7 +195,7 @@ class PerformWithdrawalPIXMetaPay implements ShouldQueue
                 "account_data" => $user_account_data
             ];
 
-            $path_name = "result-metapay-cashout-".date("Y-m-d");
+            $path_name = "result-metapay-cashout-split-".date("Y-m-d");
 
             if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
                 mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
@@ -204,42 +204,6 @@ class PerformWithdrawalPIXMetaPay implements ShouldQueue
             $FunctionsAPIController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
 
             curl_close($curl);
-
-            if(isset($get_response['external_id'])){
-
-                if($get_response['status'] == "pending"){
-
-                    DB::beginTransaction();
-                    try{
-
-                        //Do update
-                        $transaction->update([
-                            "payment_id" => $get_response['external_id']
-                        ]);
-
-                        DB::commit();
-
-                    }catch(Exception $e){
-                        DB::roolback();
-                    }
-
-                }else{
-                    DB::beginTransaction();
-                    try{
-
-                        //Do update
-                        $transaction->update([
-                            "status" => "canceled"
-                        ]);
-
-                        DB::commit();
-
-                    }catch(Exception $e){
-                        DB::roolback();
-                    }
-                }
-
-            }
 
         }
 

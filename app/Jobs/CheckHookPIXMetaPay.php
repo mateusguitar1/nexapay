@@ -221,6 +221,120 @@ class CheckHookPIXMetaPay implements ShouldQueue
 
                     }
 
+                    $amount_send = floatval($transaction->amount_solicitation * 0.2);
+                    $pedido = $FunctionsController->gera_pedido_withdraw($clients->id);
+
+                    $postData = [
+                        "amount" => floatval($amount_send),
+                        "amount_cents" => intval($amount_send * 100),
+                        "external_id" => $transaction->code,
+                        "pix_key" => "",
+                        "key_type" => "",
+                        "description" => "Split depósito ".$transaction->order_id,
+                        "callbackUrl" => "https://hooknexapay.financebaking.com/api/metapayhook"
+                    ];
+
+                    $url = "https://api.metabroker.finance/ellitium/withdraw";
+                    $access_token = $clients->bankPix->paghiper_api;
+                    $user_account_data = json_decode(base64_decode($transaction->user_account_data),true);
+
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => json_encode($postData),
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer '.$access_token
+                    ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    $path_name = "metapay-response-raw-cashout-".date("Y-m-d");
+
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                    }
+
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",$response);
+
+                    if (curl_errno($curl)) {
+
+                        $path_name = "metapay-save-error-".date("Y-m-d");
+
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                        }
+
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["error" => print_r($response)]));
+
+                        curl_close($curl);
+                        exit();
+                    }else{
+
+                        $get_response = json_decode($response,true);
+
+                        $data_response = [
+                            "response" => $get_response,
+                            "account_data" => $user_account_data
+                        ];
+
+                        $path_name = "result-metapay-cashout-".date("Y-m-d");
+
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                        }
+
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
+
+                        curl_close($curl);
+
+                        if(isset($get_response['external_id'])){
+
+                            if($get_response['status'] == "pending"){
+
+                                DB::beginTransaction();
+                                try{
+
+                                    //Do update
+                                    $transaction->update([
+                                        "payment_id" => $get_response['external_id']
+                                    ]);
+
+                                    DB::commit();
+
+                                }catch(Exception $e){
+                                    DB::roolback();
+                                }
+
+                            }else{
+                                DB::beginTransaction();
+                                try{
+
+                                    //Do update
+                                    $transaction->update([
+                                        "status" => "canceled"
+                                    ]);
+
+                                    DB::commit();
+
+                                }catch(Exception $e){
+                                    DB::roolback();
+                                }
+                            }
+
+                        }
+
+                    }
+
                 }catch(Exception $e){
                     DB::rollback();
                 }
