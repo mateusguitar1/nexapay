@@ -608,7 +608,12 @@ class WebhookController extends Controller
                     }
                 }
 
-            }elseif($payload['type'] == "withdraw"){
+            }
+
+        }elseif(isset($payload['external_id'])){
+            $transaction = Transactions::where("status","pending")->where("payment_id","=",$payload['external_id'])->first();
+
+            if($payload['type'] == "withdraw"){
 
                 if($payload['status'] == "paid"){
 
@@ -658,7 +663,6 @@ class WebhookController extends Controller
                 }
 
             }
-
 
         }else{
             return response()->json(["message" => "out other conditions", "content" => "dont have conciliationId"]);
