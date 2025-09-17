@@ -10020,7 +10020,7 @@ class FunctionsAPIController extends Controller
         $data = [
             "amount" => $params['amount'],
             "external_id" => $params['pedido'],
-            "clientCallbackUrl" => "https://hooknexapay.financebaking.com/api/suitpayhook",
+            "clientCallbackUrl" => "https://hooknexapay.financebaking.com/api/metapayhook",
             "payer" => [
                 "name" => $params['nome_usuario'],
                 "email" => "systemnexapay@gmail.com",
