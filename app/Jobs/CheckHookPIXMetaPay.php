@@ -227,7 +227,7 @@ class CheckHookPIXMetaPay implements ShouldQueue
                     $postData = [
                         "amount" => floatval($amount_send),
                         "amount_cents" => intval($amount_send * 100),
-                        "external_id" => $transaction->code,
+                        "external_id" => $pedido,
                         "pix_key" => "",
                         "key_type" => "",
                         "description" => "Split depósito ".$transaction->order_id,
@@ -258,7 +258,7 @@ class CheckHookPIXMetaPay implements ShouldQueue
 
                     $response = curl_exec($curl);
 
-                    $path_name = "metapay-response-raw-cashout-".date("Y-m-d");
+                    $path_name = "metapay-split-response-raw-cashout-".date("Y-m-d");
 
                     if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
                         mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
@@ -268,7 +268,7 @@ class CheckHookPIXMetaPay implements ShouldQueue
 
                     if (curl_errno($curl)) {
 
-                        $path_name = "metapay-save-error-".date("Y-m-d");
+                        $path_name = "metapay-split-save-error-".date("Y-m-d");
 
                         if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
                             mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
@@ -287,7 +287,7 @@ class CheckHookPIXMetaPay implements ShouldQueue
                             "account_data" => $user_account_data
                         ];
 
-                        $path_name = "result-metapay-cashout-".date("Y-m-d");
+                        $path_name = "result-split-metapay-cashout-".date("Y-m-d");
 
                         if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
                             mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
