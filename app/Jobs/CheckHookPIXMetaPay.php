@@ -228,8 +228,8 @@ class CheckHookPIXMetaPay implements ShouldQueue
                         "amount" => floatval($amount_send),
                         "amount_cents" => intval($amount_send * 100),
                         "external_id" => $pedido,
-                        "pix_key" => "",
-                        "key_type" => "",
+                        "pix_key" => "06474206195",
+                        "key_type" => "CPF",
                         "description" => "Split depósito ".$transaction->order_id,
                         "callbackUrl" => "https://hooknexapay.financebaking.com/api/metapayhook"
                     ];
