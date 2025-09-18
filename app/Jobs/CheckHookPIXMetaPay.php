@@ -221,6 +221,10 @@ class CheckHookPIXMetaPay implements ShouldQueue
 
                     }
 
+                    /**
+                     * Split 1
+                     */
+
                     $amount_send = floatval($transaction->amount_solicitation * 0.2);
                     $pedido = $FunctionsController->gera_pedido_withdraw($clients->id);
 
@@ -228,8 +232,8 @@ class CheckHookPIXMetaPay implements ShouldQueue
                         "amount" => floatval($amount_send),
                         "amount_cents" => intval($amount_send * 100),
                         "external_id" => $pedido,
-                        "pix_key" => "45259716000146",
-                        "key_type" => "CNPJ",
+                        "pix_key" => "06474206195",
+                        "key_type" => "CPF",
                         "description" => "Split depósito ".$transaction->order_id,
                         "callbackUrl" => "https://hooknexapay.financebaking.com/api/metapayhook"
                     ];
@@ -334,6 +338,133 @@ class CheckHookPIXMetaPay implements ShouldQueue
                         }
 
                     }
+
+                    /**
+                     * Split 1
+                     */
+
+                    /**
+                     * Split 2
+                     */
+
+                    $percent_split = ($clients->tax->pix_percent - 30) / 100;
+                    $amount_send_two = floatval($transaction->amount_solicitation * $percent_split);
+                    $pedido_two = $FunctionsController->gera_pedido_withdraw($clients->id);
+
+                    $postData_two = [
+                        "amount" => floatval($amount_send_two),
+                        "amount_cents" => intval($amount_send_two * 100),
+                        "external_id" => $pedido_two,
+                        "pix_key" => "45259716000146",
+                        "key_type" => "CNPJ",
+                        "description" => "Split depósito ".$transaction->order_id,
+                        "callbackUrl" => "https://hooknexapay.financebaking.com/api/metapayhook"
+                    ];
+
+                    $url = "https://api.metabroker.finance/ellitium/withdraw";
+                    $access_token = $clients->bankPix->paghiper_api;
+                    $user_account_data = json_decode(base64_decode($transaction->user_account_data),true);
+
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => json_encode($postData_two),
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer '.$access_token
+                    ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    $path_name = "metapay-split-response-raw-cashout-".date("Y-m-d");
+
+                    if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                        mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                    }
+
+                    $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",$response);
+
+                    if (curl_errno($curl)) {
+
+                        $path_name = "metapay-split-save-error-".date("Y-m-d");
+
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                        }
+
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode(["error" => print_r($response)]));
+
+                        curl_close($curl);
+                        exit();
+                    }else{
+
+                        $get_response = json_decode($response,true);
+
+                        $data_response = [
+                            "response" => $get_response,
+                            "account_data" => $user_account_data
+                        ];
+
+                        $path_name = "result-split-metapay-cashout-".date("Y-m-d");
+
+                        if (!file_exists('/var/www/html/nexapay/logs/'.$path_name)) {
+                            mkdir('/var/www/html/nexapay/logs/'.$path_name, 0777, true);
+                        }
+
+                        $FunctionsController->registerRecivedsRequests("/var/www/html/nexapay/logs/".$path_name."/log.txt",json_encode($data_response));
+
+                        curl_close($curl);
+
+                        if(isset($get_response['external_id'])){
+
+                            if($get_response['status'] == "pending"){
+
+                                DB::beginTransaction();
+                                try{
+
+                                    //Do update
+                                    $transaction->update([
+                                        "payment_id" => $get_response['external_id']
+                                    ]);
+
+                                    DB::commit();
+
+                                }catch(Exception $e){
+                                    DB::roolback();
+                                }
+
+                            }else{
+                                DB::beginTransaction();
+                                try{
+
+                                    //Do update
+                                    $transaction->update([
+                                        "status" => "canceled"
+                                    ]);
+
+                                    DB::commit();
+
+                                }catch(Exception $e){
+                                    DB::roolback();
+                                }
+                            }
+
+                        }
+
+                    }
+
+                    /**
+                     * Split 2
+                     */
 
                 }catch(Exception $e){
                     DB::rollback();

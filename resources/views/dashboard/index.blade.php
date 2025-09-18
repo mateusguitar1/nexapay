@@ -185,7 +185,7 @@ h3{
                                                     <option value="CNPJ">CNPJ</option>
                                                     <option value="PHONE">TELEFONE</option>
                                                     <option value="EMAIL">EMAIL</option>
-                                                    <option value="EVP">ALEATÓRIA</option>
+                                                    {{-- <option value="EVP">ALEATÓRIA</option> --}}
                                                 </select>
                                             </div>
                                             <div class="col-md-4 mb-3">
