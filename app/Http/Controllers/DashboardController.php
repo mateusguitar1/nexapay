@@ -25,6 +25,18 @@ class DashboardController extends Controller
         $start = date("Y-m-d 00:00:00");
         $end = date("Y-m-d 23:59:59");
 
+        $amount_cashin = 0;
+        $quantity_cashin = 0;
+        $amount_cashout = 0;
+        $quantity_cashout = 0;
+        $cashout_fee_deposit = 0;
+        $cashout_fee_withdraw = 0;
+        $balance = 0;
+        $av_today = 0;
+        $tobe_released = 0;
+        $all_registers = 0;
+        $total_registers = 0;
+
         if(auth()->user()->level == "master"){
 
             $cashin = Extract::where("type_transaction_extract","cash-in")
