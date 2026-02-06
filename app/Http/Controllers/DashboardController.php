@@ -36,6 +36,9 @@ class DashboardController extends Controller
         $tobe_released = 0;
         $all_registers = 0;
         $total_registers = 0;
+        $clients = [];
+        $banks = [];
+        $request = [];
 
         if(auth()->user()->level == "master"){
 
