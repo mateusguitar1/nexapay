@@ -22,13 +22,13 @@ Route::get('/', function () {
         return view('login');
     }
 });
-Route::get('/register', function () {
-    if(isset(auth()->user()->id)){
-        return redirect("/dashboard");
-    }else{
-        return view('login');
-    }
-});
+// Route::get('/register', function () {
+//     if(isset(auth()->user()->id)){
+//         return redirect("/dashboard");
+//     }else{
+//         return view('login');
+//     }
+// });
 
 Route::get('/show2fa', '\App\Http\Controllers\Get2faController@index');
 Route::get('/get2fa', '\App\Http\Controllers\Get2faController@get2fa');
